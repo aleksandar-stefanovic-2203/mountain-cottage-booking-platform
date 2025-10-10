@@ -3,7 +3,7 @@ USE PlaninskaVikendica;
 
 CREATE TABLE User(
 	username VARCHAR(20) PRIMARY KEY,
-    password VARCHAR(100) NOT NULL,
+    password CHAR(60) NOT NULL,
     firstName NVARCHAR(20) NOT NULL,
     lastName NVARCHAR(50) NOT NULL,
     gender NCHAR(1) CHECK (gender IN ('М', 'Ж')),
@@ -11,5 +11,8 @@ CREATE TABLE User(
     phoneNumber VARCHAR(20) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     # Профилну слику накнадно додати!!!
-    creditCardNumber VARCHAR(20) NOT NULL
+    creditCardNumber VARCHAR(20) NOT NULL,
+    type NCHAR(1) NOT NULL CHECK (type IN ('Т', 'В', 'А'))
 );
+
+INSERT INTO User VALUES ('Aca2203', '', 'Александар', 'Стефановић', 'М', 'Маријане Грегоран 85/23', '063-436-297', 'stefanovicsalex@gmail.com', '5100111122223333', 'А');

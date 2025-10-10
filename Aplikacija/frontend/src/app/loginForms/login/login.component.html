@@ -1,0 +1,12 @@
+<h1>Улогуј се као {{getUserTypeName()}}:</h1>
+Корисничко име: <input type="text" [(ngModel)]="username"><br>
+Лозинка: <input type="password" [(ngModel)]="password"><br>
+@if(userType == 'К'){
+    Тип корисника: 
+    <select [(ngModel)]="type">
+        <option value="Т">Туриста</option>
+        <option value="В">Власник</option>
+    </select><br>
+}
+<button (click)="login()">Улогуј се</button><br>
+<span style="color: red">{{message}}</span>
