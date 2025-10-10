@@ -15,4 +15,4 @@ CREATE TABLE User(
     type NCHAR(1) NOT NULL CHECK (type IN ('Т', 'В', 'А'))
 );
 
-INSERT INTO User VALUES ('Aca2203', '', 'Александар', 'Стефановић', 'М', 'Маријане Грегоран 85/23', '063-436-297', 'stefanovicsalex@gmail.com', '5100111122223333', 'А');
+INSERT INTO User VALUES ('Aca2203', '$2a$10$IvbeWIYihkDQAG8A6Mo0dOo6bF1/iB83GIFQ15rOXTw/zfrZPQ1iK', 'Александар', 'Стефановић', 'М', 'Маријане Грегоран 85/23', '063-436-297', 'stefanovicsalex@gmail.com', '5100111122223333', 'А');

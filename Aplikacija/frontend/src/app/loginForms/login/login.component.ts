@@ -38,14 +38,15 @@ export class LoginComponent {
       this.message = this.message = "Поље за корисничко име је празно!"
       return
     } 
-    if(!Utils.checkPassword(this.password)){
-      this.message = this.message = "Лозинка није у одговарајућем формату!"
+    if(this.password == ""){
+      this.message = this.message = "Поље за лозинку је празно!"
       return
     }
     else {
       this.message = ""
-      this.userService.login(this.username, this.password, this.type).subscribe(data => {
-        
+      let newType = this.userType == "А" ? "А" : this.type
+      this.userService.login(this.username, this.password, newType).subscribe(data => {
+        alert(JSON.stringify(data))
       })
     }
   }
