@@ -23,14 +23,14 @@ public class UserRepo implements UserRepoInterface {
     @Override
     public User login(User user) {
         try(Connection con = DB.source().getConnection();
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE username = ? AND type = ?");){
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE username = ? AND type = ? AND status = 'активан'");){
             stm.setString(1, user.getUsername());
             stm.setString(2, user.getType());
 
             ResultSet rs = stm.executeQuery();
 
             if(rs.next() && passwordEncoder.matches(user.getPassword(), rs.getString("password"))){
-                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getString("creditCardNumber"), rs.getString("type"));
+                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
             }
             
         } catch (SQLException e){

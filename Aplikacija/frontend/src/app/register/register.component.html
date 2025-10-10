@@ -1,0 +1,22 @@
+<h1>Региструј се као корисник:</h1>
+Корисничко име: <input type="text" [(ngModel)]="user.username"><br>
+Лозинка: <input type="password" [(ngModel)]="user.password"><br>
+Име: <input type="text" [(ngModel)]="user.firstName"><br>
+Презиме: <input type="text" [(ngModel)]="user.lastName"><br>
+Пол: 
+    <select [(ngModel)]="user.gender">        
+        <option value="М">Мушки</option>
+        <option value="Ж">Женски</option>
+        <option value="Д">Друго</option>
+    </select><br>
+Адреса: <input type="text" [(ngModel)]="user.address"><br>
+Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
+И-мејл адреса: <input type="text" [(ngModel)]="user.email"><br>
+Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber"><br>
+Тип корисника: 
+    <select [(ngModel)]="user.type">
+        <option value="Т">Туриста</option>
+        <option value="В">Власник</option>
+    </select><br>
+<button (click)="register()">Региструј се</button><br>
+<span style="color: red;">{{message}}</span>

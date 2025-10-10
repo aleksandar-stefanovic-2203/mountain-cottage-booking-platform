@@ -6,13 +6,14 @@ CREATE TABLE User(
     password CHAR(60) NOT NULL,
     firstName NVARCHAR(20) NOT NULL,
     lastName NVARCHAR(50) NOT NULL,
-    gender NCHAR(1) CHECK (gender IN ('М', 'Ж')),
+    gender NCHAR(1) NOT NULL CHECK (gender IN ('М', 'Ж', 'Д')),
     address NVARCHAR(100) NOT NULL,
     phoneNumber VARCHAR(20) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     # Профилну слику накнадно додати!!!
     creditCardNumber VARCHAR(20) NOT NULL,
-    type NCHAR(1) NOT NULL CHECK (type IN ('Т', 'В', 'А'))
+    type NCHAR(1) NOT NULL CHECK (type IN ('Т', 'В', 'А')),
+    status NVARCHAR(10) NOT NULL CHECK (status IN ('непознат', 'активан', 'неактиван'))
 );
 
-INSERT INTO User VALUES ('Aca2203', '$2a$10$IvbeWIYihkDQAG8A6Mo0dOo6bF1/iB83GIFQ15rOXTw/zfrZPQ1iK', 'Александар', 'Стефановић', 'М', 'Маријане Грегоран 85/23', '063-436-297', 'stefanovicsalex@gmail.com', '5100111122223333', 'А');
+INSERT INTO User VALUES ('Aca2203', '$2a$10$IvbeWIYihkDQAG8A6Mo0dOo6bF1/iB83GIFQ15rOXTw/zfrZPQ1iK', 'Александар', 'Стефановић', 'М', 'Маријане Грегоран 85/23', '063-436-297', 'stefanovicsalex@gmail.com', '5100111122223333', 'А', 'активан');

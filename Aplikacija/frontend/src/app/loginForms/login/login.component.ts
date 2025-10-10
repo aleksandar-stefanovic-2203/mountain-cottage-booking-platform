@@ -1,6 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-import { Utils } from '../../utils';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -46,7 +45,11 @@ export class LoginComponent {
       this.message = ""
       let newType = this.userType == "А" ? "А" : this.type
       this.userService.login(this.username, this.password, newType).subscribe(data => {
-        alert(JSON.stringify(data))
+        if(data){
+          localStorage.setItem("loggedUser", JSON.stringify(data))
+        } else {
+          this.message = this.userType == 'К'? "Погрешно корисничко име, лозинка или тип корисника!" : "Погрешно корисничко име или лозинка!"
+        }
       })
     }
   }

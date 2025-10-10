@@ -3,10 +3,11 @@ export class User {
     password: string = ""
     firstName: string = ""
     lastName: string = ""
-    gender: string = ""
+    gender: string = "М"
     address: string = ""
     phoneNumber: string = ""
     email: string = ""
     creditCardNumber: string = ""
-    type: string = ""
+    type: string = "Т"
+    status: string = "непознат"
 }

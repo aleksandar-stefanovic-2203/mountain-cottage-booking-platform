@@ -11,9 +11,10 @@ public class User {
     private String email;
     private String creditCardNumber;
     private String type;
+    private String status;
 
     public User(String username, String password, String firstName, String lastName, String gender, String address,
-    String phoneNumber, String email, String creditCardNumber, String type) {
+    String phoneNumber, String email, String creditCardNumber, String type, String status) {
 
         this.username = username;
         this.password = password;
@@ -25,6 +26,7 @@ public class User {
         this.email = email;
         this.creditCardNumber = creditCardNumber;
         this.type = type;
+        this.status = status;
         
     }
 
@@ -107,4 +109,13 @@ public class User {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
 }
