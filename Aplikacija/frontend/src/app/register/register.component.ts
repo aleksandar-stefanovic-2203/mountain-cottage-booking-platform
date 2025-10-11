@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -12,13 +13,27 @@ import { User } from '../models/user';
 export class RegisterComponent {
   user: User = new User()
   message: string = ""
+
+  private userService = inject(UserService)
   register(): void {
-    if(this.user.username == "" || this.user.password == "" || this.user.firstName == "" || this.user.lastName == "" || 
-       this.user.address == "" || this.user.phoneNumber == "" || this.user.email == "" || this.user.creditCardNumber == ""
-    ) {
-      this.message = "Нису сва поља попуњена!"
-    } else { //TODO Проверити формат лозинке и броја кредитне картице
-      this.message = ""
+    const fields: (keyof User)[] = ['username', 'password', 'firstName', 'lastName', 'address', 'phoneNumber', 'email', 'creditCardNumber'];
+    for(let field of fields){
+      if(this.user[field] === "") {
+        this.message = "Нису сва поља попуњена!"
+        return
+      }
     }
+
+    if(!this.userService.checkPassword(this.user.password)){
+      this.message = "Лозинка није у одговарајућем формату!"
+      return
+    }
+
+    if(!this.userService.checkCreditCardNumber(this.user.creditCardNumber)){
+      this.message = "Број кредитне картице није у одговарајућем формату!"
+      return
+    }
+
+    alert("Успешно унети подаци!")
   }
 }
