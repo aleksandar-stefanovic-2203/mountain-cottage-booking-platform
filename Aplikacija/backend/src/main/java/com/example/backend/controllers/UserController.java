@@ -24,4 +24,10 @@ public class UserController {
     public User login(@RequestBody User user) {
         return userRepo.login(user);
     }
+
+    @PostMapping("/register")
+    public int register(@RequestBody User user) {
+        return userRepo.register(user);
+    }
+    
 }

@@ -39,5 +39,29 @@ public class UserRepo implements UserRepoInterface {
 
         return null;
     }
+
+    @Override
+    public int register(User user) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'непознат')");){
+            stm.setString(1, user.getUsername());
+            stm.setString(2, passwordEncoder.encode(user.getPassword()));
+            stm.setString(3, user.getFirstName());
+            stm.setString(4, user.getLastName());
+            stm.setString(5, user.getGender());
+            stm.setString(6, user.getAddress());
+            stm.setString(7, user.getPhoneNumber());
+            stm.setString(8, user.getEmail());
+            stm.setString(9, user.getCreditCardNumber());
+            stm.setString(10, user.getType());
+
+            return stm.executeUpdate();
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
     
 }

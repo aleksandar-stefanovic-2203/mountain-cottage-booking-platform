@@ -23,7 +23,7 @@ export class UserService {
   }
 
   checkPassword(password: string): boolean {
-    let regExpr = /^(?=.{6,10}$)(?=[A-Za-z])(?=(?:.*[A-Z]))(?=(?:.*[a-z]){3,})(?=.*\d)(?=.*[^A-Za-z0-9]).*$/ //TODO Научити регуларне изразе!
+    let regExpr = /^(?=.{6,10}$)(?=[A-Za-z])(?=.*[A-Z])(?=(?:.*[a-z].*){3,})(?=.*\d)(?=.*[^A-Za-z0-9]).*$/ //TODO Научити регуларне изразе!
     return regExpr.test(password)
   }
 
@@ -33,5 +33,9 @@ export class UserService {
     let visaRegExpr = /^(4539|4556|4916|4532|4929|4485|4716)\d{12}$/
 
     return dinersRegExpr.test(CCN) || masterCardRegExpr.test(CCN) || visaRegExpr.test(CCN)
+  }
+
+  register(user: User){
+    return this.http.post<number>(`${this.backPath}/register`, user)
   }
 }

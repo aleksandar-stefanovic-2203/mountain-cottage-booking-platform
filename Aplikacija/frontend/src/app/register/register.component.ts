@@ -23,7 +23,7 @@ export class RegisterComponent {
         return
       }
     }
-
+    
     if(!this.userService.checkPassword(this.user.password)){
       this.message = "Лозинка није у одговарајућем формату!"
       return
@@ -34,6 +34,12 @@ export class RegisterComponent {
       return
     }
 
-    alert("Успешно унети подаци!")
+    this.userService.register(this.user).subscribe(data => {
+      if(data == 1){
+        alert("Захтев за регистрацију је послат!")
+      } else {
+        this.message = "Грешка при регистрацији!"
+      }
+    })
   }
 }

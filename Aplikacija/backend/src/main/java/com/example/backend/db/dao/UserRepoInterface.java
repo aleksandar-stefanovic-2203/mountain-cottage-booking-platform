@@ -4,4 +4,5 @@ import com.example.backend.models.User;
 
 public interface UserRepoInterface {
     public User login(User user);
+    public int register(User user);
 }
