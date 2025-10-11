@@ -23,7 +23,7 @@ public class UserRepo implements UserRepoInterface {
     @Override
     public User login(User user) {
         try(Connection con = DB.source().getConnection();
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE username = ? AND type = ? AND status = 'активан'");){
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE BINARY username = ? AND type = ? AND status = 'активан'");){
             stm.setString(1, user.getUsername());
             stm.setString(2, user.getType());
 

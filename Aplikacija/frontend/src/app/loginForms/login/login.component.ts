@@ -41,11 +41,11 @@ export class LoginComponent {
       this.message = this.message = "Поље за лозинку је празно!"
       return
     }
-    else {
-      this.message = ""
+    else {      
       let newType = this.userType == "А" ? "А" : this.type
       this.userService.login(this.username, this.password, newType).subscribe(data => {
         if(data){
+          this.message = ""
           localStorage.setItem("loggedUser", JSON.stringify(data))
         } else {
           this.message = this.userType == 'К'? "Погрешно корисничко име, лозинка или тип корисника!" : "Погрешно корисничко име или лозинка!"
