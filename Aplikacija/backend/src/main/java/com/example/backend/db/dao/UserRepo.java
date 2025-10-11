@@ -1,10 +1,12 @@
 package com.example.backend.db.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +32,9 @@ public class UserRepo implements UserRepoInterface {
             ResultSet rs = stm.executeQuery();
 
             if(rs.next() && passwordEncoder.matches(user.getPassword(), rs.getString("password"))){
-                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
+                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), new MockMultipartFile("profilePicture", rs.getBytes("profilePicture")), rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
             }
-            
+
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -43,7 +45,7 @@ public class UserRepo implements UserRepoInterface {
     @Override
     public int register(User user) {
         try(Connection con = DB.source().getConnection();
-        PreparedStatement stm = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'непознат')");){
+        PreparedStatement stm = con.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'непознат')");){
             stm.setString(1, user.getUsername());
             stm.setString(2, passwordEncoder.encode(user.getPassword()));
             stm.setString(3, user.getFirstName());
@@ -52,12 +54,13 @@ public class UserRepo implements UserRepoInterface {
             stm.setString(6, user.getAddress());
             stm.setString(7, user.getPhoneNumber());
             stm.setString(8, user.getEmail());
-            stm.setString(9, user.getCreditCardNumber());
-            stm.setString(10, user.getType());
+            stm.setBytes(9, user.getProfilePicture().getBytes());
+            stm.setString(10, user.getCreditCardNumber());
+            stm.setString(11, user.getType());
 
             return stm.executeUpdate();
             
-        } catch (SQLException e){
+        } catch (SQLException | IOException e){
             e.printStackTrace();
         }
 

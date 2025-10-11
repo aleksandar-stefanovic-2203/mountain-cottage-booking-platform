@@ -36,6 +36,24 @@ export class UserService {
   }
 
   register(user: User){
-    return this.http.post<number>(`${this.backPath}/register`, user)
+    const formData = new FormData()
+
+    formData.append('username', user.username);
+    formData.append('password', user.password);
+    formData.append('firstName', user.firstName);
+    formData.append('lastName', user.lastName);
+    formData.append('gender', user.gender);
+    formData.append('address', user.address);
+    formData.append('phoneNumber', user.phoneNumber);
+    formData.append('email', user.email);
+    formData.append('creditCardNumber', user.creditCardNumber);
+    formData.append('type', user.type);
+    formData.append('status', user.status);
+
+    if (user.profilePicture) {
+      formData.append('profilePicture', user.profilePicture, user.profilePicture.name);
+    }
+    
+    return this.http.post<number>(`${this.backPath}/register`, formData)
   }
 }

@@ -15,6 +15,11 @@ export class RegisterComponent {
   message: string = ""
 
   private userService = inject(UserService)
+
+  changePicture(event: any){
+    this.user.profilePicture = event.target.files[0]
+  }
+  
   register(): void {
     const fields: (keyof User)[] = ['username', 'password', 'firstName', 'lastName', 'address', 'phoneNumber', 'email', 'creditCardNumber'];
     for(let field of fields){
