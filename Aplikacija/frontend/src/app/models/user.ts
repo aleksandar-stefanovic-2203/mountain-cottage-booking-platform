@@ -8,6 +8,7 @@ export class User {
     phoneNumber: string = ""
     email: string = ""
     profilePicture: File | null = null
+    profilePictureBytes: string | null = null
     creditCardNumber: string = ""
     type: string = "Т"
     status: string = "непознат"

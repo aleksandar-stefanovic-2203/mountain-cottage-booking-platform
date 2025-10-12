@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,10 +11,12 @@ import { User } from '../../models/user';
 })
 export class ProfileComponent implements OnInit {
   @Input('user') user: User = new User()
-  imgSrc = ""
+  private userService = inject(UserService)
+  imgUrl = ""
   ngOnInit(): void {
-    if(this.user.profilePicture){
-      //this.imgSrc = URL.createObjectURL(this.user.profilePicture)
+    if(this.user.profilePictureBytes){
+      const bytes = this.userService.stringToBytes(this.user.profilePictureBytes)
+      this.imgUrl = this.userService.bytesToImage(bytes)
     }
   }
 }

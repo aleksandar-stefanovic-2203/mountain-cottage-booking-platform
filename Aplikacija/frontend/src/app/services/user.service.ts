@@ -65,4 +65,20 @@ export class UserService {
 
     return new User()
   }
+
+  stringToBytes(bytesString: string): number[] {
+  const binaryString = atob(bytesString);
+  const len = binaryString.length;
+  const bytes = [];
+  for (let i = 0; i < len; i++) {
+    bytes.push(binaryString.charCodeAt(i));
+  }
+  return bytes;
+}
+
+  bytesToImage(bytes: number[], type = "image/jpeg"): string {
+    const safeBytes = new Uint8Array(bytes)
+    const blob = new Blob([safeBytes], {type: type})
+    return URL.createObjectURL(blob)
+  }
 }

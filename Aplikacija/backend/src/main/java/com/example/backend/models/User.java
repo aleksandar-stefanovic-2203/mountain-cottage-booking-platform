@@ -1,7 +1,5 @@
 package com.example.backend.models;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class User {
     private String username;
     private String password;
@@ -11,13 +9,13 @@ public class User {
     private String address;
     private String phoneNumber;
     private String email;
-    private byte[] profilePicture;
+    private byte[] profilePictureBytes;
     private String creditCardNumber;
     private String type;
     private String status;
 
     public User(String username, String password, String firstName, String lastName, String gender, String address,
-    String phoneNumber, String email, byte[] profilePicture, String creditCardNumber, String type, String status) {
+    String phoneNumber, String email, byte[] profilePictureBytes, String creditCardNumber, String type, String status) {
 
         this.username = username;
         this.password = password;
@@ -27,7 +25,7 @@ public class User {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.profilePicture = profilePicture;
+        this.profilePictureBytes = profilePictureBytes;
         this.creditCardNumber = creditCardNumber;
         this.type = type;
         this.status = status;
@@ -122,12 +120,12 @@ public class User {
         this.status = status;
     }
 
-    public byte[] getProfilePicture() {
-        return profilePicture;
+    public byte[] getProfilePictureBytes() {
+        return profilePictureBytes;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setProfilePictureBytes(byte[] profilePictureBytes) {
+        this.profilePictureBytes = profilePictureBytes;
     }
     
 }

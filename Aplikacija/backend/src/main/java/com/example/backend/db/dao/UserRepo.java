@@ -1,12 +1,10 @@
 package com.example.backend.db.dao;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +52,7 @@ public class UserRepo implements UserRepoInterface {
             stm.setString(6, user.getAddress());
             stm.setString(7, user.getPhoneNumber());
             stm.setString(8, user.getEmail());
-            stm.setBytes(9, user.getProfilePicture());
+            stm.setBytes(9, user.getProfilePictureBytes());
             stm.setString(10, user.getCreditCardNumber());
             stm.setString(11, user.getType());
 
