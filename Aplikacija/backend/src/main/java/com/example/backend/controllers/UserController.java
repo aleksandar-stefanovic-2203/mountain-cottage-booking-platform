@@ -57,7 +57,7 @@ public class UserController {
                 byte[] content = Files.readAllBytes(path);
                 profilePicture = new MockMultipartFile(name, originalFileName, contentType, content);
             }
-            User user = new User(username, password, firstName, lastName, gender, address, phoneNumber, email, profilePicture, creditCardNumber, type, status);
+            User user = new User(username, password, firstName, lastName, gender, address, phoneNumber, email, profilePicture.getBytes(), creditCardNumber, type, status);
             return userRepo.register(user);
         } catch (IOException e) {
             e.printStackTrace();

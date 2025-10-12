@@ -32,7 +32,7 @@ public class UserRepo implements UserRepoInterface {
             ResultSet rs = stm.executeQuery();
 
             if(rs.next() && passwordEncoder.matches(user.getPassword(), rs.getString("password"))){
-                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), new MockMultipartFile("profilePicture", rs.getBytes("profilePicture")), rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
+                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getBytes("profilePicture"), rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
             }
 
         } catch (SQLException e){
@@ -54,13 +54,13 @@ public class UserRepo implements UserRepoInterface {
             stm.setString(6, user.getAddress());
             stm.setString(7, user.getPhoneNumber());
             stm.setString(8, user.getEmail());
-            stm.setBytes(9, user.getProfilePicture().getBytes());
+            stm.setBytes(9, user.getProfilePicture());
             stm.setString(10, user.getCreditCardNumber());
             stm.setString(11, user.getType());
 
             return stm.executeUpdate();
             
-        } catch (SQLException | IOException e){
+        } catch (SQLException e){
             e.printStackTrace();
         }
 

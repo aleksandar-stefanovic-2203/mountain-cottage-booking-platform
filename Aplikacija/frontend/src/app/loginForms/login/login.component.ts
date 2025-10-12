@@ -1,6 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,7 @@ export class LoginComponent {
   message: string = ""
 
   private userService = inject(UserService)
+  private router = inject(Router)
 
   login(): void{
     if(this.username == ""){
@@ -47,6 +49,14 @@ export class LoginComponent {
         if(data){
           this.message = ""
           localStorage.setItem("loggedUser", JSON.stringify(data))
+
+          if(this.userType == 'А'){
+            this.router.navigate(["/admin"])
+          } else if(data.type == 'Т') {
+            this.router.navigate(["/tourist"])
+          } else if(data.type == 'В'){
+            this.router.navigate(["/owner"])
+          }
         } else {
           this.message = this.userType == 'К'? "Погрешно корисничко име, лозинка или тип корисника!" : "Погрешно корисничко име или лозинка!"
         }

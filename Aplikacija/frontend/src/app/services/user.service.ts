@@ -56,4 +56,13 @@ export class UserService {
     
     return this.http.post<number>(`${this.backPath}/register`, formData)
   }
+
+  fetchUser(): User {
+    let u = localStorage.getItem("loggedUser")
+    if(u){
+      return JSON.parse(u)
+    }
+
+    return new User()
+  }
 }

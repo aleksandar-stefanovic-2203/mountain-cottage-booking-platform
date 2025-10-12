@@ -11,13 +11,13 @@ public class User {
     private String address;
     private String phoneNumber;
     private String email;
-    private MultipartFile profilePicture;
+    private byte[] profilePicture;
     private String creditCardNumber;
     private String type;
     private String status;
 
     public User(String username, String password, String firstName, String lastName, String gender, String address,
-    String phoneNumber, String email, MultipartFile profilePicture, String creditCardNumber, String type, String status) {
+    String phoneNumber, String email, byte[] profilePicture, String creditCardNumber, String type, String status) {
 
         this.username = username;
         this.password = password;
@@ -122,11 +122,11 @@ public class User {
         this.status = status;
     }
 
-    public MultipartFile getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(MultipartFile profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
     
