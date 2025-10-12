@@ -48,16 +48,7 @@ public class UserController {
         @RequestParam(required = false) MultipartFile profilePicture
     ) {
         try {
-            if(profilePicture == null) {
-                Path path = Path.of("public/default-profile-picture.jpg");
-                String name = "profilePicture";
-                String originalFileName = "default-profile-picture.jpg";
-                String contentType = "image/jpg";
-
-                byte[] content = Files.readAllBytes(path);
-                profilePicture = new MockMultipartFile(name, originalFileName, contentType, content);
-            }
-            User user = new User(username, password, firstName, lastName, gender, address, phoneNumber, email, profilePicture.getBytes(), creditCardNumber, type, status);
+            User user = new User(username, password, firstName, lastName, gender, address, phoneNumber, email, profilePicture != null ? profilePicture.getBytes() : null, creditCardNumber, type, status);
             return userRepo.register(user);
         } catch (IOException e) {
             e.printStackTrace();

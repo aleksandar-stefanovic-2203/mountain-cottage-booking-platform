@@ -1,5 +1,8 @@
 package com.example.backend.db.dao;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,9 +18,16 @@ import com.example.backend.models.User;
 public class UserRepo implements UserRepoInterface {
 
     private final PasswordEncoder passwordEncoder;
+    private static Path path = Path.of("Aplikacija/backend/public/default-profile-picture.jpg");
+    private static byte[] defaultProfilePictureBytes;
 
     public UserRepo(PasswordEncoder passwordEncoder){
         this.passwordEncoder = passwordEncoder;
+        try {
+            defaultProfilePictureBytes = Files.readAllBytes(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -30,7 +40,7 @@ public class UserRepo implements UserRepoInterface {
             ResultSet rs = stm.executeQuery();
 
             if(rs.next() && passwordEncoder.matches(user.getPassword(), rs.getString("password"))){
-                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getBytes("profilePicture"), rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
+                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getBytes("profilePicture") != null ? rs.getBytes("profilePicture") : defaultProfilePictureBytes, rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
             }
 
         } catch (SQLException e){
