@@ -35,6 +35,24 @@ export class UserService {
     return dinersRegExpr.test(CCN) || masterCardRegExpr.test(CCN) || visaRegExpr.test(CCN)
   }
 
+  // TODO Искоментарисати цео пројекат!!!
+  checkImage(file: File): Promise<boolean> {
+    const allowedTypes = ['image/jpeg', 'image/png'];
+    if(!allowedTypes.includes(file.type)) return Promise.resolve(false);
+
+    return new Promise((resolve) => {
+      const img = new Image()
+      img.src = URL.createObjectURL(file)
+      img.onload = () => {
+        if(img.width < 100 || img.width > 300 || img.height < 100 || img.height > 300) resolve(false)
+        else resolve(true)
+
+        URL.revokeObjectURL(img.src)
+      }
+      img.onerror = () => resolve(false)
+    })
+  }
+
   register(user: User){
     const formData = new FormData()
 

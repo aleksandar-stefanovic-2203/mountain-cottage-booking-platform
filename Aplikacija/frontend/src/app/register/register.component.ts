@@ -17,7 +17,21 @@ export class RegisterComponent {
   private userService = inject(UserService)
 
   changePicture(event: any){
-    this.user.profilePicture = event.target.files[0]
+    let picture = event.target.files[0]
+    if(!picture) return
+    this.userService.checkImage(picture).then(value => {
+      if(value) {
+        this.user.profilePicture = picture
+        this.message = ""
+      }
+      else {
+        event.target.value = ""
+        this.message = "Слика није одговарајућих димензија или није у одговарајућем формату!"
+      }
+    }).catch(err => {
+      event.target.value = ""
+      this.message = "Дошло је до грешке при учитавању слике!"
+    })
   }
   
   register(): void {
