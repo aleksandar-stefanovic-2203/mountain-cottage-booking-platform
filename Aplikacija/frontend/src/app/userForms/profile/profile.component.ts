@@ -3,11 +3,12 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -17,6 +18,7 @@ export class ProfileComponent implements OnInit, OnChanges {
   private router = inject(Router)
   imgUrl = ""
   message = ""
+  newProfilePicture = false
   ngOnInit(): void {
     this.loadImg()
   }
@@ -50,7 +52,7 @@ export class ProfileComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.userService.updateData(this.user).subscribe(data => {
+    this.userService.updateData(this.user, this.newProfilePicture).subscribe(data => {
       if(data == 1){
         this.message = ""
         alert("Подаци ажурирани успешно!")

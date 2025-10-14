@@ -83,11 +83,12 @@ public class UserController {
         @RequestParam String creditCardNumber,
         @RequestParam String type,
         @RequestParam String status,
-        @RequestParam(required = false) MultipartFile profilePicture
+        @RequestParam(required = false) MultipartFile profilePicture,
+        @RequestParam String newProfilePicture
     ) {
         try {
             User user = new User(username, password, firstName, lastName, gender, address, phoneNumber, email, profilePicture != null ? profilePicture.getBytes() : null, creditCardNumber, type, status);
-            return userRepo.updateData(user);
+            return userRepo.updateData(user, newProfilePicture);
         } catch (IOException e) {
             e.printStackTrace();
         }

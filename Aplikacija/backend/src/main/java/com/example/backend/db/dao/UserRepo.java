@@ -122,17 +122,23 @@ public class UserRepo implements UserRepoInterface {
     }
 
     @Override
-    public int updateData(User user) {
+    public int updateData(User user, String newProfilePicture) {
         try(Connection con = DB.source().getConnection();
-        PreparedStatement stm = con.prepareStatement("UPDATE user SET firstName = ?, lastName = ?, address = ?, phoneNumber = ?, email = ?, profilePicture = ?, creditCardNumber = ? WHERE username = ?");){            
+        PreparedStatement stm = con.prepareStatement("UPDATE user SET firstName = ?, lastName = ?, address = ?, phoneNumber = ?, email = ?, " + (newProfilePicture.equals("Да") ? "profilePicture = ?," : "") + "creditCardNumber = ? WHERE username = ?");){                                    
+            System.out.println(newProfilePicture);
             stm.setString(1, user.getFirstName());
             stm.setString(2, user.getLastName());
             stm.setString(3, user.getAddress());
             stm.setString(4, user.getPhoneNumber());
             stm.setString(5, user.getEmail());
-            stm.setBytes(6, user.getProfilePictureBytes());
-            stm.setString(7, user.getCreditCardNumber());
-            stm.setString(8, user.getUsername());
+
+            int index = 6;
+            if(newProfilePicture.equals("Да")){
+                stm.setBytes(index, user.getProfilePictureBytes());
+                index++;
+            }
+            stm.setString(index, user.getCreditCardNumber());
+            stm.setString(index + 1, user.getUsername());
 
             return stm.executeUpdate();
             

@@ -134,8 +134,9 @@ export class UserService {
     }
   }
 
-  updateData(user: User){
+  updateData(user: User, newProfilePicture: boolean){
     const formData = this.prepareFormData(user)
+    formData.append("newProfilePicture", newProfilePicture ? "Да" : "Не")
     return this.http.put<number>(`${this.backPath}/updateData`, formData)
   }
 

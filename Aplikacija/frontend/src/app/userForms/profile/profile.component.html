@@ -7,7 +7,8 @@
 Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
 Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber"><br>
 Профилна слика: <img [src]="imgUrl"><br>
-Нова профилна слика: <input type="file" (change)="changePicture($event)" accept="image/*"><br>
+Да ли желите да промените профилну слику? <label><input type="checkbox" [(ngModel)]="newProfilePicture">да</label><br>
+<input *ngIf="newProfilePicture" type="file" (change)="changePicture($event)" accept="image/*"><br>
 <button (click)="updateData()">Ажурирај податке</button>
 <hr>
 <a (click)="openChangePasswordWindow()">Промени лозинку</a><br>
