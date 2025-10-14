@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './userForms/admin/admin.component';
 import { TouristComponent } from './userForms/tourist/tourist.component';
 import { OwnerComponent } from './userForms/owner/owner.component';
+import { ChangePasswordComponent } from './userForms/change-password/change-password.component';
 
 export const routes: Routes = [
     {path: "", component: UnregisteredUserComponent},
@@ -14,5 +15,6 @@ export const routes: Routes = [
     {path: "register", component: RegisterComponent},
     {path: "tourist", component: TouristComponent},
     {path: "owner", component: OwnerComponent},
-    {path: "admin", component: AdminComponent}
+    {path: "admin", component: AdminComponent},
+    {path: "changePassword", component: ChangePasswordComponent}
 ];

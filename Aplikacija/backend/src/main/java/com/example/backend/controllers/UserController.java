@@ -1,12 +1,12 @@
 package com.example.backend.controllers;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Map;
 
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,4 +57,8 @@ public class UserController {
         return 0;
     }
     
+    @PatchMapping("/changePassword/{username}")
+    public int changePassword(@PathVariable String username, @RequestBody Map<String, Object> changes){
+        return userRepo.changePassword(username, (String) changes.get("oldPassword"), (String) changes.get("newPassword"));
+    }
 }

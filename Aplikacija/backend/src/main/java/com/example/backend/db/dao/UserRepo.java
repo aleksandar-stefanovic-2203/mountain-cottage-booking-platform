@@ -74,5 +74,32 @@ public class UserRepo implements UserRepoInterface {
 
         return 0;
     }
+
+    @Override
+    public int changePassword(String username, String oldPassword, String newPassword) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT password FROM user WHERE BINARY username = ? AND status = 'активан'");
+        PreparedStatement stm2 = con.prepareStatement("UPDATE user SET password = ? WHERE BINARY username = ? AND status = 'активан'")){
+            stm.setString(1, username);
+
+            stm2.setString(1, passwordEncoder.encode(newPassword));
+            stm2.setString(2, username);
+
+            ResultSet rs = stm.executeQuery();
+
+            if(!rs.next()) return -1;
+
+            if(!passwordEncoder.matches(oldPassword, rs.getString("password"))) return -2;
+
+            if(oldPassword == newPassword) return -3;
+
+            return stm2.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
     
 }

@@ -37,7 +37,7 @@ export class UserService {
 
   // TODO Искоментарисати цео пројекат!!!
   checkImage(file: File): Promise<boolean> {
-    const allowedTypes = ['image/jpeg', 'image/png'];
+    const allowedTypes = ['image/jpeg', 'image/png']; //TODO Негде сам ставио да се прихвата само jpeg, не могу да се сетим где, то треба исправити!
     if(!allowedTypes.includes(file.type)) return Promise.resolve(false);
 
     return new Promise((resolve) => {
@@ -85,18 +85,22 @@ export class UserService {
   }
 
   stringToBytes(bytesString: string): number[] {
-  const binaryString = atob(bytesString);
-  const len = binaryString.length;
-  const bytes = [];
-  for (let i = 0; i < len; i++) {
-    bytes.push(binaryString.charCodeAt(i));
+    const binaryString = atob(bytesString);
+    const len = binaryString.length;
+    const bytes = [];
+    for (let i = 0; i < len; i++) {
+      bytes.push(binaryString.charCodeAt(i));
+    }
+    return bytes;
   }
-  return bytes;
-}
 
   bytesToImage(bytes: number[], type = "image/jpeg"): string {
     const safeBytes = new Uint8Array(bytes)
     const blob = new Blob([safeBytes], {type: type})
     return URL.createObjectURL(blob)
+  }
+
+  changePassword(username: string, oldPassword: string, newPassword: string){
+    return this.http.patch<number>(`${this.backPath}/changePassword/${username}`, {"oldPassword": oldPassword, "newPassword": newPassword})
   }
 }
