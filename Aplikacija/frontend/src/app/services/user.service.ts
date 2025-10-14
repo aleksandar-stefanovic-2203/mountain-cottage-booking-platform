@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { User } from '../models/user';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,7 @@ export class UserService {
     })
   }
 
-  register(user: User){
+  prepareFormData(user: User): FormData{
     const formData = new FormData()
 
     formData.append('username', user.username);
@@ -71,17 +72,26 @@ export class UserService {
     if (user.profilePicture) {
       formData.append('profilePicture', user.profilePicture, user.profilePicture.name);
     }
-    
+
+    return formData
+  }
+
+  register(user: User){
+    const formData = this.prepareFormData(user)
     return this.http.post<number>(`${this.backPath}/register`, formData)
   }
 
-  fetchUser(): User {
+  fetchUser() {
     let u = localStorage.getItem("loggedUser")
     if(u){
-      return JSON.parse(u)
+      return this.getUser(u)
     }
 
-    return new User()
+    return of(new User())
+  }
+
+  getUser(username: string){
+    return this.http.get<User>(`${this.backPath}/${username}`)
   }
 
   stringToBytes(bytesString: string): number[] {
@@ -102,5 +112,49 @@ export class UserService {
 
   changePassword(username: string, oldPassword: string, newPassword: string){
     return this.http.patch<number>(`${this.backPath}/changePassword/${username}`, {"oldPassword": oldPassword, "newPassword": newPassword})
+  }
+
+  async changePicture(user: User, event: any): Promise<string>{
+    let picture = event.target.files[0]
+    if(!picture) return "Грешка"
+
+    try {
+      const value = await this.checkImage(picture);
+
+      if (value) {
+        user.profilePicture = picture;
+        return "";
+      } else {
+        event.target.value = "";
+        return "Слика није одговарајућих димензија или није у одговарајућем формату!";
+      }
+    } catch (err) {
+      event.target.value = "";
+      return "Дошло је до грешке при учитавању слике!";
+    }
+  }
+
+  updateData(user: User){
+    const formData = this.prepareFormData(user)
+    return this.http.put<number>(`${this.backPath}/updateData`, formData)
+  }
+
+  checkFields(user: User, checkPassword: boolean): string{
+    const fields: (keyof User)[] = ['username', 'password', 'firstName', 'lastName', 'address', 'phoneNumber', 'email', 'creditCardNumber'];
+    for(let field of fields){
+      if(user[field] === "") {
+        return "Нису сва поља попуњена!"
+      }
+    }
+    
+    if(checkPassword && !this.checkPassword(user.password)){
+      return "Лозинка није у одговарајућем формату!"
+    }
+
+    if(!this.checkCreditCardNumber(user.creditCardNumber)){
+      return "Број кредитне картице није у одговарајућем формату!"
+    }
+
+    return "Све је у реду"
   }
 }

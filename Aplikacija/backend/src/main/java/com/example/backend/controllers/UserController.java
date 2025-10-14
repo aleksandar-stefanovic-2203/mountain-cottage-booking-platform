@@ -16,7 +16,10 @@ import com.example.backend.db.dao.UserRepo;
 import com.example.backend.models.User;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
 @RestController
@@ -60,5 +63,35 @@ public class UserController {
     @PatchMapping("/changePassword/{username}")
     public int changePassword(@PathVariable String username, @RequestBody Map<String, Object> changes){
         return userRepo.changePassword(username, (String) changes.get("oldPassword"), (String) changes.get("newPassword"));
+    }
+
+    @GetMapping("/{username}")
+    public User getUser(@PathVariable String username) {
+        return userRepo.getUser(username);
+    }
+    
+    @PutMapping("/updateData")
+    public int updateData(
+        @RequestParam String username,
+        @RequestParam String password,
+        @RequestParam String firstName,
+        @RequestParam String lastName,
+        @RequestParam String gender,
+        @RequestParam String address,
+        @RequestParam String phoneNumber,
+        @RequestParam String email,
+        @RequestParam String creditCardNumber,
+        @RequestParam String type,
+        @RequestParam String status,
+        @RequestParam(required = false) MultipartFile profilePicture
+    ) {
+        try {
+            User user = new User(username, password, firstName, lastName, gender, address, phoneNumber, email, profilePicture != null ? profilePicture.getBytes() : null, creditCardNumber, type, status);
+            return userRepo.updateData(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }

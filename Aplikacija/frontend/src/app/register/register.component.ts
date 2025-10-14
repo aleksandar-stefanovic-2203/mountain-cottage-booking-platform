@@ -16,45 +16,21 @@ export class RegisterComponent {
 
   private userService = inject(UserService)
 
-  changePicture(event: any){
-    let picture = event.target.files[0]
-    if(!picture) return
-    this.userService.checkImage(picture).then(value => {
-      if(value) {
-        this.user.profilePicture = picture
-        this.message = ""
-      }
-      else {
-        event.target.value = ""
-        this.message = "Слика није одговарајућих димензија или није у одговарајућем формату!"
-      }
-    }).catch(err => {
-      event.target.value = ""
-      this.message = "Дошло је до грешке при учитавању слике!"
-    })
+  async changePicture(event: any){
+    this.message = await this.userService.changePicture(this.user, event)
   }
   
   register(): void {
-    const fields: (keyof User)[] = ['username', 'password', 'firstName', 'lastName', 'address', 'phoneNumber', 'email', 'creditCardNumber'];
-    for(let field of fields){
-      if(this.user[field] === "") {
-        this.message = "Нису сва поља попуњена!"
-        return
-      }
-    }
-    
-    if(!this.userService.checkPassword(this.user.password)){
-      this.message = "Лозинка није у одговарајућем формату!"
-      return
-    }
+    let message = this.userService.checkFields(this.user, true)
 
-    if(!this.userService.checkCreditCardNumber(this.user.creditCardNumber)){
-      this.message = "Број кредитне картице није у одговарајућем формату!"
+    if(message !== "Све је у реду"){
+      this.message = message;
       return
     }
 
     this.userService.register(this.user).subscribe(data => {
       if(data == 1){
+        this.message = ""
         alert("Захтев за регистрацију је послат!")
       } else {
         this.message = "Грешка при регистрацији!"

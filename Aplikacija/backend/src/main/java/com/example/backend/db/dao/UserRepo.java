@@ -101,5 +101,46 @@ public class UserRepo implements UserRepoInterface {
 
         return 0;
     }
+
+    @Override
+    public User getUser(String username) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE BINARY username = ?");){
+            stm.setString(1, username);
+
+            ResultSet rs = stm.executeQuery();
+
+            if(rs.next()){
+                return new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getBytes("profilePicture") != null ? rs.getBytes("profilePicture") : defaultProfilePictureBytes, rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status"));
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public int updateData(User user) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("UPDATE user SET firstName = ?, lastName = ?, address = ?, phoneNumber = ?, email = ?, profilePicture = ?, creditCardNumber = ? WHERE username = ?");){            
+            stm.setString(1, user.getFirstName());
+            stm.setString(2, user.getLastName());
+            stm.setString(3, user.getAddress());
+            stm.setString(4, user.getPhoneNumber());
+            stm.setString(5, user.getEmail());
+            stm.setBytes(6, user.getProfilePictureBytes());
+            stm.setString(7, user.getCreditCardNumber());
+            stm.setString(8, user.getUsername());
+
+            return stm.executeUpdate();
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
     
 }

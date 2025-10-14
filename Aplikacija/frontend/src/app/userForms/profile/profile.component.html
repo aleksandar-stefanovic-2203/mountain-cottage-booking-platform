@@ -1,5 +1,5 @@
 <h1>Профил</h1>
-Корисничко име: <input type="text" [(ngModel)]="user.username"><br>
+Корисничко име: <input type="text" [(ngModel)]="user.username" disabled><br>
 Име: <input type="text" [(ngModel)]="user.firstName"><br>
 Презиме: <input type="text" [(ngModel)]="user.lastName"><br>
 Адреса: <input type="text" [(ngModel)]="user.address"><br>
@@ -7,4 +7,8 @@
 Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
 Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber"><br>
 Профилна слика: <img [src]="imgUrl"><br>
-<a (click)="openChangePasswordWindow()">Промени лозинку</a>
+Нова профилна слика: <input type="file" (change)="changePicture($event)" accept="image/*"><br>
+<button (click)="updateData()">Ажурирај податке</button>
+<hr>
+<a (click)="openChangePasswordWindow()">Промени лозинку</a><br>
+<span style="color: red;">{{message}}</span>

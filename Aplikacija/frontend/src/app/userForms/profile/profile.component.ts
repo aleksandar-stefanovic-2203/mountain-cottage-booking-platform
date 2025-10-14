@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -11,12 +11,23 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnChanges {
   @Input('user') user: User = new User()
   private userService = inject(UserService)
   private router = inject(Router)
   imgUrl = ""
+  message = ""
   ngOnInit(): void {
+    this.loadImg()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['user'] && this.user?.profilePictureBytes){
+      this.loadImg()
+    }
+  }
+
+  loadImg(){
     if(this.user.profilePictureBytes){
       const bytes = this.userService.stringToBytes(this.user.profilePictureBytes)
       this.imgUrl = this.userService.bytesToImage(bytes) //TODO Деалоцирање ресурса! (URL.revokeObjectURL(imgUrl))
@@ -25,5 +36,27 @@ export class ProfileComponent implements OnInit {
 
   openChangePasswordWindow(){
     this.router.navigate(["/changePassword"])
+  }
+
+  async changePicture(event: any){
+    this.message = await this.userService.changePicture(this.user, event)
+  }
+
+  updateData(){
+    let message = this.userService.checkFields(this.user, false)
+
+    if(message !== "Све је у реду"){
+      this.message = message;
+      return;
+    }
+
+    this.userService.updateData(this.user).subscribe(data => {
+      if(data == 1){
+        this.message = ""
+        alert("Подаци ажурирани успешно!")
+      } else {
+        this.message = "Грешка при измени података!"
+      }
+    })
   }
 }

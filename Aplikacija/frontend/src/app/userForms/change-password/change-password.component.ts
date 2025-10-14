@@ -16,7 +16,9 @@ export class ChangePasswordComponent {
   private router = inject(Router)
 
   ngOnInit(): void {
-    this.user = this.userService.fetchUser()
+    this.userService.fetchUser().subscribe(data => {
+      this.user = data
+    })
   }
 
   user: User = new User()

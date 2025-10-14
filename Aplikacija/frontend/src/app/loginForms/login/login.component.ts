@@ -48,7 +48,7 @@ export class LoginComponent {
       this.userService.login(this.username, this.password, newType).subscribe(data => {
         if(data){
           this.message = ""
-          localStorage.setItem("loggedUser", JSON.stringify(data))
+          localStorage.setItem("loggedUser", data.username)
 
           if(this.userType == 'А'){
             this.router.navigate(["/admin"])
