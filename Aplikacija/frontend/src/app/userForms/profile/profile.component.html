@@ -1,10 +1,10 @@
 <h1>Профил</h1>
-Корисничко име: {{user.username}}<br>
-Име: {{user.firstName}}<br>
-Презиме: {{user.lastName}}<br>
-Адреса: {{user.address}}<br>
-И-мејл адреса: {{user.email}}<br>
-Контакт телефон: {{user.phoneNumber}}<br>
-Број кредитне картице: {{user.creditCardNumber}}<br>
+Корисничко име: <input type="text" [(ngModel)]="user.username"><br>
+Име: <input type="text" [(ngModel)]="user.firstName"><br>
+Презиме: <input type="text" [(ngModel)]="user.lastName"><br>
+Адреса: <input type="text" [(ngModel)]="user.address"><br>
+И-мејл адреса: <input type="text" [(ngModel)]="user.email"><br>
+Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
+Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber"><br>
 Профилна слика: <img [src]="imgUrl"><br>
 <a (click)="openChangePasswordWindow()">Промени лозинку</a>

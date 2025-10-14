@@ -18,7 +18,7 @@ import com.example.backend.models.User;
 public class UserRepo implements UserRepoInterface {
 
     private final PasswordEncoder passwordEncoder;
-    private static Path path = Path.of("Aplikacija/backend/public/default-profile-picture.jpg");
+    private static Path path = Path.of("Aplikacija/backend/public/default-profile-picture.png");
     private static byte[] defaultProfilePictureBytes;
 
     public UserRepo(PasswordEncoder passwordEncoder){
