@@ -1,8 +1,5 @@
 package com.example.backend.db.dao;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,22 +9,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.db.DB;
+import com.example.backend.db.DefaultProfilePicture;
 import com.example.backend.models.User;
 
 @Service
 public class UserRepo implements UserRepoInterface {
 
     private final PasswordEncoder passwordEncoder;
-    private static Path path = Path.of("Aplikacija/backend/public/default-profile-picture.png");
-    private static byte[] defaultProfilePictureBytes;
+    private final byte[] defaultProfilePictureBytes;
 
-    public UserRepo(PasswordEncoder passwordEncoder){
+    public UserRepo(PasswordEncoder passwordEncoder, DefaultProfilePicture defaultProfilePicture){
         this.passwordEncoder = passwordEncoder;
-        try {
-            defaultProfilePictureBytes = Files.readAllBytes(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.defaultProfilePictureBytes = defaultProfilePicture.getBytes();
     }
 
     @Override
@@ -124,8 +117,7 @@ public class UserRepo implements UserRepoInterface {
     @Override
     public int updateData(User user, String newProfilePicture) {
         try(Connection con = DB.source().getConnection();
-        PreparedStatement stm = con.prepareStatement("UPDATE user SET firstName = ?, lastName = ?, address = ?, phoneNumber = ?, email = ?, " + (newProfilePicture.equals("Да") ? "profilePicture = ?," : "") + "creditCardNumber = ? WHERE username = ?");){                                    
-            System.out.println(newProfilePicture);
+        PreparedStatement stm = con.prepareStatement("UPDATE user SET firstName = ?, lastName = ?, address = ?, phoneNumber = ?, email = ?, " + (newProfilePicture.equals("Да") ? "profilePicture = ?," : "") + "creditCardNumber = ? WHERE username = ?");){                                                
             stm.setString(1, user.getFirstName());
             stm.setString(2, user.getLastName());
             stm.setString(3, user.getAddress());
