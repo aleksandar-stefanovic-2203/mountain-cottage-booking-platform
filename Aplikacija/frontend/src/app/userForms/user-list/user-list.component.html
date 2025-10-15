@@ -22,6 +22,7 @@
             <td>{{user.creditCardNumber}}</td>
             <td>{{getTypeName(user.type)}}</td>
             <td>{{user.status}}</td>
+            <td><button (click)="changeStatus(user)">{{user.status === 'активан' ? 'Деактивирај' : 'Активирај'}}</button></td>
         </tr>
     }
 </table>
@@ -52,4 +53,4 @@
         </tr>
     }
 </table>
-{{message}}
+<span style="color: red;">{{message}}</span>

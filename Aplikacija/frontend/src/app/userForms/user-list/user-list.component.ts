@@ -40,7 +40,7 @@ export class UserListComponent implements OnInit {
   accept(registrationRequest: User){
     this.userService.changeStatus(registrationRequest.username, "активан").subscribe(data => {
       if(data == 1){
-        this.message = "Регистрација прихваћена!"
+        this.message = ""
         this.ngOnInit()
       } else {
         this.message = "Грешка!"
@@ -51,12 +51,17 @@ export class UserListComponent implements OnInit {
   reject(registrationRequest: User){
     this.userService.changeStatus(registrationRequest.username, "неактиван").subscribe(data => {
       if(data == 1){
-        this.message = "Регистрација одбијена!"
+        this.message = ""
         this.ngOnInit()
       } else {
         this.message = "Грешка!"
       }
     })
+  }
+
+  changeStatus(user: User){
+    if(user.status === "активан") this.reject(user)
+    else this.accept(user)
   }
 
   users: User[] = []

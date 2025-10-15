@@ -155,7 +155,7 @@ public class UserRepo implements UserRepoInterface {
     
     private List<User> getUsers(boolean allUsers){
         try(Connection con = DB.source().getConnection();
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE status " + (allUsers ? "!=" : "=") + " 'непознат'");){
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE status " + (allUsers ? "!=" : "=") + " 'непознат' ORDER BY status, username");){
 
             ResultSet rs = stm.executeQuery();
             List<User> users = new ArrayList<>();
