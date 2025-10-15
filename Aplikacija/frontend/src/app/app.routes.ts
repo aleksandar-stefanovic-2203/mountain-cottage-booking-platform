@@ -7,14 +7,21 @@ import { AdminComponent } from './userForms/admin/admin.component';
 import { TouristComponent } from './userForms/tourist/tourist.component';
 import { OwnerComponent } from './userForms/owner/owner.component';
 import { ChangePasswordComponent } from './userForms/change-password/change-password.component';
+import { ProfileComponent } from './userForms/profile/profile.component';
 
 export const routes: Routes = [
     {path: "", component: UnregisteredUserComponent},
     {path: "login", component: LoginUserComponent},
     {path: "loginAdmin", component: LoginAdminComponent},
     {path: "register", component: RegisterComponent},
-    {path: "tourist", component: TouristComponent},
-    {path: "owner", component: OwnerComponent},
-    {path: "admin", component: AdminComponent},
+    {path: "tourist", component: TouristComponent, children: [
+        {path: "profile/:username", component: ProfileComponent}
+    ]},
+    {path: "owner", component: OwnerComponent, children: [
+        {path: "profile/:username", component: ProfileComponent}
+    ]},
+    {path: "admin", component: AdminComponent, children: [
+        {path: "profile/:username", component: ProfileComponent}
+    ]},
     {path: "changePassword", component: ChangePasswordComponent}
 ];

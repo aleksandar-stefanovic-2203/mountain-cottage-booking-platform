@@ -3,11 +3,12 @@ import { ProfileComponent } from '../profile/profile.component';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-owner',
   standalone: true,
-  imports: [ProfileComponent, CommonModule],
+  imports: [ProfileComponent, CommonModule, RouterOutlet],
   templateUrl: './owner.component.html',
   styleUrl: './owner.component.css'
 })

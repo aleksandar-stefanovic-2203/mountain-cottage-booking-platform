@@ -51,11 +51,11 @@ export class LoginComponent {
           localStorage.setItem("loggedUser", data.username)
 
           if(this.userType == 'А'){
-            this.router.navigate(["/admin"])
+            this.router.navigate([`/admin/profile/${data.username}`])
           } else if(data.type == 'Т') {
-            this.router.navigate(["/tourist"])
+            this.router.navigate([`/tourist/profile/${data.username}`])
           } else if(data.type == 'В'){
-            this.router.navigate(["/owner"])
+            this.router.navigate([`/owner/profile/${data.username}`])
           }
         } else {
           this.message = this.userType == 'К'? "Погрешно корисничко име, лозинка или тип корисника!" : "Погрешно корисничко име или лозинка!"

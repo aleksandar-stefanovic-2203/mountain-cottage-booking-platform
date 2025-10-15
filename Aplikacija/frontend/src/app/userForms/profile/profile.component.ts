@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LogoutComponent } from '../../logout/logout.component';
@@ -13,21 +13,21 @@ import { LogoutComponent } from '../../logout/logout.component';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent implements OnInit, OnChanges {
-  @Input('user') user: User = new User()
+export class ProfileComponent implements OnInit {
+  user: User = new User()
   private userService = inject(UserService)
   private router = inject(Router)
+  private activatedRoute = inject(ActivatedRoute)
   imgUrl = ""
   message = ""
   newProfilePicture = false
+  
   ngOnInit(): void {
-    this.loadImg()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes['user'] && this.user?.profilePictureBytes){
+    let username = this.activatedRoute.snapshot.paramMap.get('username')!
+    this.userService.getUser(username).subscribe(data => {
+      this.user = data
       this.loadImg()
-    }
+    })    
   }
 
   loadImg(){
