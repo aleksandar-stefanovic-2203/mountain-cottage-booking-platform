@@ -106,4 +106,9 @@ public class UserController {
     public List<User> getAllRegistrationRequests() {
         return userRepo.getAllRegistrationRequests();
     }
+
+    @PatchMapping("/changeStatus/{username}")
+    public int changeStatus(@PathVariable String username, @RequestBody String status){
+        return userRepo.changeStatus(username, status);
+    }
 }

@@ -12,4 +12,5 @@ public interface UserRepoInterface {
     public int updateData(User user, String newProfilePicture);
     public List<User> getAllUsers();
     public List<User> getAllRegistrationRequests();
+    public int changeStatus(String username, String status);
 }

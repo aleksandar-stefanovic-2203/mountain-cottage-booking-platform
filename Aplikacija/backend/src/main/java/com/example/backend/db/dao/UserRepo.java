@@ -85,8 +85,8 @@ public class UserRepo implements UserRepoInterface {
             if(!rs.next()) return -1;
 
             if(!passwordEncoder.matches(oldPassword, rs.getString("password"))) return -2;
-
-            if(oldPassword == newPassword) return -3;
+            
+            if(oldPassword.equals(newPassword)) return -3;
 
             return stm2.executeUpdate();
 
@@ -171,5 +171,21 @@ public class UserRepo implements UserRepoInterface {
         }
 
         return null;
+    }
+
+    @Override
+    public int changeStatus(String username, String status) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("UPDATE user SET status = ? WHERE username = ?");){                                                
+            stm.setString(1, status);
+            stm.setString(2, username);
+
+            return stm.executeUpdate();
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class UserListComponent implements OnInit{
+export class UserListComponent implements OnInit {
   private userService = inject(UserService)
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe(data => {
@@ -37,6 +37,29 @@ export class UserListComponent implements OnInit{
     }
   }
 
+  accept(registrationRequest: User){
+    this.userService.changeStatus(registrationRequest.username, "активан").subscribe(data => {
+      if(data == 1){
+        this.message = "Регистрација прихваћена!"
+        this.ngOnInit()
+      } else {
+        this.message = "Грешка!"
+      }
+    })
+  }
+
+  reject(registrationRequest: User){
+    this.userService.changeStatus(registrationRequest.username, "неактиван").subscribe(data => {
+      if(data == 1){
+        this.message = "Регистрација одбијена!"
+        this.ngOnInit()
+      } else {
+        this.message = "Грешка!"
+      }
+    })
+  }
+
   users: User[] = []
   registrationRequests: User[] = []
+  message = ""
 }

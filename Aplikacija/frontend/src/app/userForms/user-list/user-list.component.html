@@ -48,6 +48,8 @@
             <td>{{registrationRequest.phoneNumber}}</td>
             <td>{{registrationRequest.creditCardNumber}}</td>
             <td>{{getTypeName(registrationRequest.type)}}</td>
+            <td><button (click)="accept(registrationRequest)">Прихвати</button><button (click)="reject(registrationRequest)">Одбиј</button></td>
         </tr>
     }
 </table>
+{{message}}

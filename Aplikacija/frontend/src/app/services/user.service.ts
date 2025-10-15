@@ -165,5 +165,9 @@ export class UserService {
 
   getAllRegistrationRequests(){
     return this.http.get<User[]>(`${this.backPath}/getAllRegistrationRequests`)
-  }  
+  }
+
+  changeStatus(username: string, status: string){
+    return this.http.patch<number>(`${this.backPath}/changeStatus/${username}`, status)
+  }
 }
