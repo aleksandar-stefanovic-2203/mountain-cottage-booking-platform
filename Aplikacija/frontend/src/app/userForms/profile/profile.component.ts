@@ -31,10 +31,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadImg(){
-    if(this.user.profilePictureBytes){
-      const bytes = this.userService.stringToBytes(this.user.profilePictureBytes)
-      this.imgUrl = this.userService.bytesToImage(bytes) //TODO Деалоцирање ресурса! (URL.revokeObjectURL(imgUrl))
-    }
+    this.imgUrl = this.userService.loadImg(this.user.profilePictureBytes)
   }
 
   openChangePasswordWindow(){

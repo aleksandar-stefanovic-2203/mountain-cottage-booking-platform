@@ -2,6 +2,7 @@ package com.example.backend.db.dao;
 
 import java.util.List;
 
+import com.example.backend.models.PictureWrapper;
 import com.example.backend.models.User;
 
 public interface UserRepoInterface {
@@ -13,4 +14,5 @@ public interface UserRepoInterface {
     public List<User> getAllUsers();
     public List<User> getAllRegistrationRequests();
     public int changeStatus(String username, String status);
+    public PictureWrapper getPictureBytes(String type);
 }

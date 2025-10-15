@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.backend.db.dao.UserRepo;
+import com.example.backend.models.PictureWrapper;
 import com.example.backend.models.User;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -111,4 +112,10 @@ public class UserController {
     public int changeStatus(@PathVariable String username, @RequestBody String status){
         return userRepo.changeStatus(username, status);
     }
+
+    @GetMapping("/getPictureBytes/{type}")
+    public PictureWrapper getPictureBytes(@PathVariable String type) {
+        return userRepo.getPictureBytes(type);
+    }
+    
 }

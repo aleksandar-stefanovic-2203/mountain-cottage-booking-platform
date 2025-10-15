@@ -13,7 +13,7 @@
 Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
 И-мејл адреса: <input type="text" [(ngModel)]="user.email"><br>
 Профилна слика: <input type="file" (change)="changePicture($event)" accept="image/*"><br>
-Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber"><br>
+Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber" (input)="onChange()"><img [src]="imgUrl"><br>
 Тип корисника: 
     <select [(ngModel)]="user.type">
         <option value="Т">Туриста</option>

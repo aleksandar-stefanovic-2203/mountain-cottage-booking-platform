@@ -11,7 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.db.DB;
-import com.example.backend.db.DefaultProfilePicture;
+import com.example.backend.db.Picture;
+import com.example.backend.models.PictureWrapper;
 import com.example.backend.models.User;
 
 @Service
@@ -19,10 +20,16 @@ public class UserRepo implements UserRepoInterface {
 
     private final PasswordEncoder passwordEncoder;
     private final byte[] defaultProfilePictureBytes;
+    private final byte[] mastercardPictureBytes;
+    private final byte[] visaPictureBytes;
+    private final byte[] dinersPictureBytes;
 
-    public UserRepo(PasswordEncoder passwordEncoder, DefaultProfilePicture defaultProfilePicture){
+    public UserRepo(PasswordEncoder passwordEncoder, Picture picture){
         this.passwordEncoder = passwordEncoder;
-        this.defaultProfilePictureBytes = defaultProfilePicture.getBytes();
+        this.defaultProfilePictureBytes = picture.getDefaultProfilePictureBytes();
+        this.mastercardPictureBytes = picture.getMastercardPictureBytes();
+        this.visaPictureBytes = picture.getVisaPictureBytes();
+        this.dinersPictureBytes = picture.getDinersPictureBytes();
     }
 
     @Override
@@ -187,5 +194,22 @@ public class UserRepo implements UserRepoInterface {
         }
 
         return 0;
+    }
+
+    @Override
+    public PictureWrapper getPictureBytes(String type) {
+        switch (type) {
+            case "mastercard":
+                return new PictureWrapper(mastercardPictureBytes);
+            
+            case "visa":
+                return new PictureWrapper(visaPictureBytes);
+
+            case "diners":
+                return new PictureWrapper(dinersPictureBytes);
+
+            default:
+                return null;
+        }
     }
 }

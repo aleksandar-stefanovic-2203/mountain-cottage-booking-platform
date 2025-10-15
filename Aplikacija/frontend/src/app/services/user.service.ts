@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { of } from 'rxjs';
+import { PictureWrapper } from '../models/picturewrapper';
 
 @Injectable({
   providedIn: 'root'
@@ -169,5 +170,18 @@ export class UserService {
 
   changeStatus(username: string, status: string){
     return this.http.patch<number>(`${this.backPath}/changeStatus/${username}`, status)
+  }
+
+  getPictureBytes(type: string){
+    return this.http.get<PictureWrapper>(`${this.backPath}/getPictureBytes/${type}`)
+  }
+
+  loadImg(strBytes: string | null): string {
+    if(strBytes){
+      const bytes = this.stringToBytes(strBytes)
+      return this.bytesToImage(bytes) //TODO Деалоцирање ресурса! (URL.revokeObjectURL(imgUrl))
+    }
+
+    return ""
   }
 }
