@@ -3,13 +3,13 @@ export class User {
     password: string = ""
     firstName: string = ""
     lastName: string = ""
-    gender: string = "М"
+    gender: string = "мушки"
     address: string = ""
     phoneNumber: string = ""
     email: string = ""
     profilePicture: File | null = null
     profilePictureBytes: string | null = null
     creditCardNumber: string = ""
-    type: string = "Т"
+    type: string = "туриста"
     status: string = "непознат"
 }

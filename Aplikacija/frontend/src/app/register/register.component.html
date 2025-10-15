@@ -5,9 +5,9 @@
 Презиме: <input type="text" [(ngModel)]="user.lastName"><br>
 Пол: 
     <select [(ngModel)]="user.gender">        
-        <option value="М">Мушки</option>
-        <option value="Ж">Женски</option>
-        <option value="Д">Друго</option>
+        <option>мушки</option>
+        <option>женски</option>
+        <option>друго</option>
     </select><br>
 Адреса: <input type="text" [(ngModel)]="user.address"><br>
 Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
@@ -16,8 +16,8 @@
 Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber" (input)="onChange()"><img [src]="imgUrl"><br>
 Тип корисника: 
     <select [(ngModel)]="user.type">
-        <option value="Т">Туриста</option>
-        <option value="В">Власник</option>
+        <option>туриста</option>
+        <option>власник</option>
     </select><br>
 <button (click)="register()">Региструј се</button><br>
 <span style="color: red;">{{message}}</span>

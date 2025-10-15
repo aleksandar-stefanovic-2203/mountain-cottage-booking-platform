@@ -11,24 +11,11 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  @Input('userType') userType: string = "К";
-
-  getUserTypeName(): string{
-    switch (this.userType) {
-      case 'К':
-        return "корисник"
-    
-      case 'А':
-        return "администратор"  
-
-      default:
-        return ""
-    }
-  }
+  @Input('userType') userType: string = "корисник";
 
   username: string = ""
   password: string = ""
-  type: string = "Т"
+  type: string = "туриста"
   message: string = ""
 
   private userService = inject(UserService)
@@ -44,21 +31,21 @@ export class LoginComponent {
       return
     }
     else {      
-      let newType = this.userType == "А" ? "А" : this.type
+      let newType = this.userType == "администратор" ? "администратор" : this.type
       this.userService.login(this.username, this.password, newType).subscribe(data => {
         if(data){
           this.message = ""
           localStorage.setItem("loggedUser", data.username)
 
-          if(this.userType == 'А'){
+          if(this.userType == 'администратор'){
             this.router.navigate([`/admin/profile/${data.username}`])
-          } else if(data.type == 'Т') {
+          } else if(data.type == 'туриста') {
             this.router.navigate([`/tourist/profile/${data.username}`])
-          } else if(data.type == 'В'){
+          } else if(data.type == 'власник'){
             this.router.navigate([`/owner/profile/${data.username}`])
           }
         } else {
-          this.message = this.userType == 'К'? "Погрешно корисничко име, лозинка или тип корисника!" : "Погрешно корисничко име или лозинка!"
+          this.message = this.userType == 'корисник'? "Погрешно корисничко име, лозинка или тип корисника!" : "Погрешно корисничко име или лозинка!"
         }
       })
     }

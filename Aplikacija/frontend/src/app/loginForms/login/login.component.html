@@ -1,11 +1,11 @@
-<h1>Улогуј се као {{getUserTypeName()}}:</h1>
+<h1>Улогуј се као {{this.userType}}:</h1>
 Корисничко име: <input type="text" [(ngModel)]="username"><br>
 Лозинка: <input type="password" [(ngModel)]="password"><br>
-@if(userType == 'К'){
+@if(userType == 'корисник'){
     Тип корисника: 
     <select [(ngModel)]="type">
-        <option value="Т">Туриста</option>
-        <option value="В">Власник</option>
+        <option>туриста</option>
+        <option>власник</option>
     </select><br>
 }
 <button (click)="login()">Улогуј се</button><br>

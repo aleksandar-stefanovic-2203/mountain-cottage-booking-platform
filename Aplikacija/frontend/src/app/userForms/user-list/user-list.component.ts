@@ -14,27 +14,11 @@ export class UserListComponent implements OnInit {
   private userService = inject(UserService)
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe(data => {
-      this.users = data.filter(user => user.type !== 'А')
+      this.users = data.filter(user => user.type !== 'администратор')
     })
     this.userService.getAllRegistrationRequests().subscribe(data => {
-      this.registrationRequests = data.filter(user => user.type !== 'А')
+      this.registrationRequests = data.filter(user => user.type !== 'администратор')
     })
-  }
-
-  getTypeName(type: string): string{
-    switch (type) {
-      case 'А':
-        return "Администратор"
-
-      case 'В':
-        return "Власник"
-
-      case 'Т':
-        return "Туриста"
-    
-      default:
-        return "Непознат"
-    }
   }
 
   accept(registrationRequest: User){

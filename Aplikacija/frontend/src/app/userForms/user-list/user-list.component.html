@@ -20,7 +20,7 @@
             <td>{{user.email}}</td>
             <td>{{user.phoneNumber}}</td>
             <td>{{user.creditCardNumber}}</td>
-            <td>{{getTypeName(user.type)}}</td>
+            <td>{{user.type}}</td>
             <td>{{user.status}}</td>
             <td><button (click)="changeStatus(user)">{{user.status === 'активан' ? 'Деактивирај' : 'Активирај'}}</button></td>
         </tr>
@@ -48,7 +48,7 @@
             <td>{{registrationRequest.email}}</td>
             <td>{{registrationRequest.phoneNumber}}</td>
             <td>{{registrationRequest.creditCardNumber}}</td>
-            <td>{{getTypeName(registrationRequest.type)}}</td>
+            <td>{{registrationRequest.type}}</td>
             <td><button (click)="accept(registrationRequest)">Прихвати</button><button (click)="reject(registrationRequest)">Одбиј</button></td>
         </tr>
     }

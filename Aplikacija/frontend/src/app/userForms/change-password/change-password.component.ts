@@ -66,7 +66,7 @@ export class ChangePasswordComponent {
           break;
       }
       localStorage.clear()
-      if(this.user.type === "А") this.router.navigate(["/loginAdmin"])
+      if(this.user.type === "администратор") this.router.navigate(["/loginAdmin"])
       else this.router.navigate(["/login"])
     })
   }
