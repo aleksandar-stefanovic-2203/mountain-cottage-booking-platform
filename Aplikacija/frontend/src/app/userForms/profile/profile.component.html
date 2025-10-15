@@ -1,6 +1,12 @@
 Корисничко име: <input type="text" [(ngModel)]="user.username" disabled><br>
 Име: <input type="text" [(ngModel)]="user.firstName"><br>
 Презиме: <input type="text" [(ngModel)]="user.lastName"><br>
+Пол: 
+<select [(ngModel)]="user.gender">
+    <option>мушки</option>
+    <option>женски</option>
+    <option>друго</option>
+</select><br>
 Адреса: <input type="text" [(ngModel)]="user.address"><br>
 И-мејл адреса: <input type="text" [(ngModel)]="user.email"><br>
 Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
