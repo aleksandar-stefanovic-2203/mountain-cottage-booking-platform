@@ -1,6 +1,7 @@
 package com.example.backend.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +95,15 @@ public class UserController {
         }
 
         return 0;
+    }
+
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers() {
+        return userRepo.getAllUsers();
+    }
+    
+    @GetMapping("/getAllRegistrationRequests")
+    public List<User> getAllRegistrationRequests() {
+        return userRepo.getAllRegistrationRequests();
     }
 }

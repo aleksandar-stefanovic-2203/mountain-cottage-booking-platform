@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -140,5 +142,34 @@ public class UserRepo implements UserRepoInterface {
 
         return 0;
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        return this.getUsers(true);
+    }
+
+    @Override
+    public List<User> getAllRegistrationRequests() {
+        return this.getUsers(false);
+    }
     
+    private List<User> getUsers(boolean allUsers){
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM user WHERE status " + (allUsers ? "!=" : "=") + " 'непознат'");){
+
+            ResultSet rs = stm.executeQuery();
+            List<User> users = new ArrayList<>();
+
+            while(rs.next()){
+                users.add(new User(rs.getString("username"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("gender"), rs.getString("address"), rs.getString("phoneNumber"), rs.getString("email"), rs.getBytes("profilePicture") != null ? rs.getBytes("profilePicture") : defaultProfilePictureBytes, rs.getString("creditCardNumber"), rs.getString("type"), rs.getString("status")));
+            }
+
+            return users;
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

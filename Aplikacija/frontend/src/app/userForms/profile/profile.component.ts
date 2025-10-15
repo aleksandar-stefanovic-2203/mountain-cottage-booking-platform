@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getUser(username).subscribe(data => {
       this.user = data
       this.loadImg()
-    })    
+    })
   }
 
   loadImg(){

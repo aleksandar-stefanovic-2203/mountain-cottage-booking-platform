@@ -158,4 +158,12 @@ export class UserService {
 
     return "Све је у реду"
   }
+
+  getAllUsers(){
+    return this.http.get<User[]>(`${this.backPath}/getAllUsers`)
+  }
+
+  getAllRegistrationRequests(){
+    return this.http.get<User[]>(`${this.backPath}/getAllRegistrationRequests`)
+  }  
 }

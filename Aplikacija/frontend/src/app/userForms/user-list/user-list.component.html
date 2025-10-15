@@ -1,0 +1,53 @@
+Списак свих корисника:
+<table>
+    <tr>
+        <th>Корисничко име</th>
+        <th>Име</th>
+        <th>Презиме</th>
+        <th>Адреса</th>
+        <th>И-мејл адреса</th>
+        <th>Контакт телефон</th>
+        <th>Број кредитне картице</th>
+        <th>Тип</th>
+        <th>Статус</th>
+    </tr>
+    @for(user of users; track user.username){
+        <tr [ngStyle]="{'background-color': user.status === 'активан' ? 'green' : 'red'}">
+            <td>{{user.username}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phoneNumber}}</td>
+            <td>{{user.creditCardNumber}}</td>
+            <td>{{getTypeName(user.type)}}</td>
+            <td>{{user.status}}</td>
+        </tr>
+    }
+</table>
+<hr>
+Захтеви за регистрацију:
+<table>
+    <tr>
+        <th>Корисничко име</th>
+        <th>Име</th>
+        <th>Презиме</th>
+        <th>Адреса</th>
+        <th>И-мејл адреса</th>
+        <th>Контакт телефон</th>
+        <th>Број кредитне картице</th>
+        <th>Тип корисника</th>
+    </tr>
+    @for(registrationRequest of registrationRequests; track registrationRequest.username){
+        <tr>
+            <td>{{registrationRequest.username}}</td>
+            <td>{{registrationRequest.firstName}}</td>
+            <td>{{registrationRequest.lastName}}</td>
+            <td>{{registrationRequest.address}}</td>
+            <td>{{registrationRequest.email}}</td>
+            <td>{{registrationRequest.phoneNumber}}</td>
+            <td>{{registrationRequest.creditCardNumber}}</td>
+            <td>{{getTypeName(registrationRequest.type)}}</td>
+        </tr>
+    }
+</table>
