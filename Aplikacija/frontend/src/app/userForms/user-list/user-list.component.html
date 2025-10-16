@@ -25,6 +25,7 @@
             <td>{{user.type}}</td>
             <td>{{user.status}}</td>
             <td><button (click)="changeStatus(user)">{{user.status === 'активан' ? 'Деактивирај' : 'Активирај'}}</button></td>
+            <td><button (click)="seeProfile(user)">Види профил</button></td>
         </tr>
     }
 </table>

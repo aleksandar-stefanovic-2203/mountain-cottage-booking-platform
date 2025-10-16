@@ -4,17 +4,18 @@ import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LogoutComponent } from '../../logout/logout.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [FormsModule, CommonModule, LogoutComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
   user: User = new User()
+  changePassword = "да"
+  changeType = "не"
   private userService = inject(UserService)
   private router = inject(Router)
   private activatedRoute = inject(ActivatedRoute)
@@ -24,6 +25,14 @@ export class ProfileComponent implements OnInit {
   
   ngOnInit(): void {
     let username = this.activatedRoute.snapshot.paramMap.get('username')!
+    let value = this.activatedRoute.snapshot.queryParamMap.get('changePassword')
+    if(value){
+      this.changePassword = value
+    }
+    value = this.activatedRoute.snapshot.queryParamMap.get('changeType')
+    if(value){
+      this.changeType = value
+    }
     this.userService.getUser(username).subscribe(data => {
       this.user = data
       this.loadImg()

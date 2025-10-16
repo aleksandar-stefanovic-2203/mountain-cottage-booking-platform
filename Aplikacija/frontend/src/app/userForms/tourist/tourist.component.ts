@@ -3,12 +3,13 @@ import { ProfileComponent } from '../profile/profile.component';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { LogoutComponent } from '../../logout/logout.component';
 
 @Component({
   selector: 'app-tourist',
   standalone: true,
-  imports: [ProfileComponent, CommonModule, RouterOutlet],
+  imports: [ProfileComponent, CommonModule, RouterOutlet, LogoutComponent, RouterModule],
   templateUrl: './tourist.component.html',
   styleUrl: './tourist.component.css'
 })

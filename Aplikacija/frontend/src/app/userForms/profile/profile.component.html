@@ -11,12 +11,19 @@
 И-мејл адреса: <input type="text" [(ngModel)]="user.email"><br>
 Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
 Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber"><br>
+@if(changeType === 'да'){
+    Тип:
+    <select [(ngModel)]="user.type">
+        <option>туриста</option>
+        <option>власник</option>
+        <option>администратор</option>
+    </select><br>
+}
 Профилна слика: <img [src]="imgUrl"><br>
 Да ли желите да промените профилну слику? <label><input type="checkbox" [(ngModel)]="newProfilePicture">да</label><br>
 @if(newProfilePicture){
     Нова профилна слика: <input type="file" (change)="changePicture($event)" accept="image/*"><br>
 }
 <button (click)="updateData()">Ажурирај податке</button><br>
-<a (click)="openChangePasswordWindow()">Промени лозинку</a><br>
+<a *ngIf="changePassword === 'да'" (click)="openChangePasswordWindow()">Промени лозинку</a><br>
 <span style="color: red;">{{message}}</span>
-<app-logout></app-logout>

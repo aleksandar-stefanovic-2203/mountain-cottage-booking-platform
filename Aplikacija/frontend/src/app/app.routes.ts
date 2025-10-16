@@ -23,7 +23,8 @@ export const routes: Routes = [
     ]},
     {path: "admin", component: AdminComponent, children: [
         {path: "profile/:username", component: ProfileComponent},
-        {path: "userList", component: UserListComponent}
+        {path: "userList", component: UserListComponent}, 
+        {path: "userList/:username", component: ProfileComponent}
     ]},
     {path: "changePassword", component: ChangePasswordComponent}
 ];

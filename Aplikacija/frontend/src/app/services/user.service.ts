@@ -142,7 +142,7 @@ export class UserService {
   }
 
   checkFields(user: User, checkPassword: boolean): string{
-    const fields: (keyof User)[] = ['username', 'password', 'firstName', 'lastName', 'gender', 'address', 'phoneNumber', 'email', 'creditCardNumber'];
+    const fields: (keyof User)[] = ['username', 'password', 'firstName', 'lastName', 'gender', 'address', 'phoneNumber', 'email', 'creditCardNumber', 'type'];
     for(let field of fields){
       if(user[field] === "") {
         return "Нису сва поља попуњена!"

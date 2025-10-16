@@ -1,7 +1,9 @@
 <h1>Администратор</h1>
+<hr>
 <header>
     <a [routerLink]="['profile', user.username]">Профил</a>&nbsp;
     <a routerLink="userList">Списак корисника</a>
 </header>
 <hr>
 <router-outlet></router-outlet>
+<app-logout></app-logout>
