@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.backend.models.PictureWrapper;
 import com.example.backend.models.User;
+import com.example.backend.models.UserInfo;
 
 public interface UserRepoInterface {
     public User login(User user);
@@ -15,4 +16,5 @@ public interface UserRepoInterface {
     public List<User> getAllRegistrationRequests();
     public int changeStatus(String username, String status);
     public PictureWrapper getPictureBytes(String type);
+    public UserInfo getUserInfo();
 }

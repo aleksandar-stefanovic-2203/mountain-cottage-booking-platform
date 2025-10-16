@@ -18,5 +18,19 @@ CREATE TABLE User(
 
 INSERT INTO User VALUES ('Aca2203', '$2a$10$IvbeWIYihkDQAG8A6Mo0dOo6bF1/iB83GIFQ15rOXTw/zfrZPQ1iK', 'Александар', 'Стефановић', 'мушки', 'Маријане Грегоран 85/23', '063-436-297', 'stefanovicsalex@gmail.com', NULL, '5100111122223333', 'администратор', 'активан'); -- aca123
 INSERT INTO User VALUES ('jovanzsavic', '$2a$10$hnGVSzzInn4aKHiZslXNWu1hswYJ7DX7ETUs0/wq.guZDJCBWDELu', 'Јован', 'Савић', 'друго', 'Булевар краља Александра 15', '063 222 333', 'jovanzsavic@gmail.com', NULL, '300122223333444', 'туриста', 'активан'); -- Jova12!
+INSERT INTO User VALUES ('gagson', '$2a$10$hnGVSzzInn4aKHiZslXNWu1hswYJ7DX7ETUs0/wq.guZDJCBWDELu', 'Драган', 'Црњаковић', 'мушки', 'Патриса Лумумбе 16', '063 221 334', 'draganc@gmail.com', NULL, '300122223333555', 'власник', 'активан'); -- Jova12!
 INSERT INTO User VALUES ('Milena123', '$2a$10$uV0kXMIEz1GqZJotl0ztiePPtyuodwpt6MZzAN6DJ3/MjWgI2B3c.', 'Милена', 'Ракита', 'женски', 'Рузвелтова 67', '065 467 8901', 'milenar@gmail.com', NULL, '4716111122223333', 'власник', 'активан'); -- MiLeNa456@
--- Aca22035 - AcAba22! / AcAba22!!
+
+CREATE TABLE Cottage(
+	idC INT PRIMARY KEY AUTO_INCREMENT,
+    name NVARCHAR(100) NOT NULL,
+    location NVARCHAR(100) NOT NULL,
+    services NVARCHAR(200),
+    phoneNumber VARCHAR(100),
+    ownerUsername VARCHAR(20),
+    FOREIGN KEY (ownerUsername) REFERENCES User(username) ON DELETE SET NULL
+);
+
+INSERT INTO Cottage (name, location, services, phoneNumber, ownerUsername) VALUES ('Апартмани Милинковић', 'Обућина Баре 150, 71423 Јахорина, Босна и Херцеговина', 'Паркинг, бесплатан интернет, Flat-screen TV, кухиња', '065 1222 567', 'Milena123');
+INSERT INTO Cottage (name, location, services, phoneNumber, ownerUsername) VALUES ('Горштак 1 и 2', 'Обућина Баре bb, 71423 Јахорина, Босна и Херцеговина', 'Бесплатан интернет, Flat-screen TV, кухиња, ски школа', '065 1222 567', 'Milena123');
+INSERT INTO Cottage (name, location, services, phoneNumber, ownerUsername) VALUES ('Olimpik House Jahorina', 'Olimpijska 46 Jahorina, 71423 Jahorina, Bosnia and Herzegovina', 'Паркинг, бесплатан интернет, доручак', '065 1234 890', 'gagson');

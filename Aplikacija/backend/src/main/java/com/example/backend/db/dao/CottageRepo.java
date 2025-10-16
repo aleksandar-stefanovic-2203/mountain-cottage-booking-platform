@@ -1,0 +1,37 @@
+package com.example.backend.db.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.backend.db.DB;
+import com.example.backend.models.Cottage;
+
+public class CottageRepo implements CottageRepoInterface {
+
+    @Override
+    public List<Cottage> getCottages(String ownerUsername) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM cottage" + ((ownerUsername != null) ? " WHERE ownerUsername = ?" : ""));){            
+            if(ownerUsername != null) stm.setString(1, ownerUsername);
+
+            ResultSet rs = stm.executeQuery();
+            List<Cottage> cottages = new ArrayList<>();
+
+            while(rs.next()){
+                cottages.add(new Cottage(rs.getInt("idC"), rs.getString("name"), rs.getString("location"), rs.getString("services"), rs.getString("phoneNumber"), rs.getString("ownerUsername")));
+            }
+
+            return cottages;
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    
+}

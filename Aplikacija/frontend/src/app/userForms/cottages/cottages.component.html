@@ -1,0 +1,18 @@
+Укупан број викендица: {{allCottages.length}}<br>
+Укупан број власника: {{userInfo.numOfOwners}}<br>
+Укупан број туриста: {{userInfo.numOfTourists}}<br>
+<hr>
+Претражи по називу: <input type="text" [(ngModel)]="name" (input)="onChange()"><br>
+Претражи по месту: <input type="text" [(ngModel)]="location" (input)="onChange()"><br><br>
+<table>
+    <tr>
+        <th><a (click)="sortByName()">{{getNameLabel()}}</a></th>
+        <th><a (click)="sortByLocation()">{{getLocationLabel()}}</a></th>
+    </tr>
+    @for(cottage of selectedCottages; track cottage.idC){
+        <tr>
+            <td>{{cottage.name}}</td>
+            <td>{{cottage.location}}</td>
+        </tr>
+    }
+</table>

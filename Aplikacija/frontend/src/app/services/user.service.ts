@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { of } from 'rxjs';
 import { PictureWrapper } from '../models/picturewrapper';
+import { UserInfo } from '../models/userinfo';
 
 @Injectable({
   providedIn: 'root'
@@ -183,5 +184,9 @@ export class UserService {
     }
 
     return ""
+  }
+
+  getUserInfo(){
+    return this.http.get<UserInfo>(`${this.backPath}/getUserInfo`)
   }
 }

@@ -14,6 +14,7 @@ import com.example.backend.db.DB;
 import com.example.backend.db.Picture;
 import com.example.backend.models.PictureWrapper;
 import com.example.backend.models.User;
+import com.example.backend.models.UserInfo;
 
 @Service
 public class UserRepo implements UserRepoInterface {
@@ -213,5 +214,27 @@ public class UserRepo implements UserRepoInterface {
             default:
                 return null;
         }
+    }
+
+    @Override
+    public UserInfo getUserInfo() {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm1 = con.prepareStatement("SELECT COUNT(*) AS 'numOfTourists' FROM user WHERE status = 'активан' AND type = 'туриста'");
+        PreparedStatement stm2 = con.prepareStatement("SELECT COUNT(*) AS 'numOfOwners' FROM user WHERE status = 'активан' AND type = 'власник'");){
+
+            ResultSet rs = stm1.executeQuery();
+            if(!rs.next()) return null;
+            int numOfTourists = rs.getInt("numOfTourists");
+            rs = stm2.executeQuery();
+            if(!rs.next()) return null;
+            int numOfOwners = rs.getInt("numOfOwners");
+
+            return new UserInfo(numOfTourists, numOfOwners);
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

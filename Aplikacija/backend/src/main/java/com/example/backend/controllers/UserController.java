@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.backend.db.dao.UserRepo;
 import com.example.backend.models.PictureWrapper;
 import com.example.backend.models.User;
+import com.example.backend.models.UserInfo;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -116,6 +117,11 @@ public class UserController {
     @GetMapping("/getPictureBytes/{type}")
     public PictureWrapper getPictureBytes(@PathVariable String type) {
         return userRepo.getPictureBytes(type);
+    }
+
+    @GetMapping("/getUserInfo")
+    public UserInfo getUserInfo() {
+        return userRepo.getUserInfo();
     }
     
 }
