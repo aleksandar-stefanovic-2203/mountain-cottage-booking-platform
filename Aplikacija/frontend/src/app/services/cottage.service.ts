@@ -21,4 +21,7 @@ export class CottageService {
     return this.http.get<Cottage[]>(`${this.backPath}` + (username ? `?ownerUsername=${username}` : ``))
   }
   
+  deleteCottage(idC: number){
+    return this.http.delete<number>(`${this.backPath}/deleteCottage/${idC}`)
+  }
 }

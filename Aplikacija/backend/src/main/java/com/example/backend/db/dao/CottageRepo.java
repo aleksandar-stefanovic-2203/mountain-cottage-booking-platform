@@ -52,5 +52,20 @@ public class CottageRepo implements CottageRepoInterface {
 
         return null;
     }
+
+    @Override
+    public int deleteCottage(int idC) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("DELETE FROM cottage WHERE idC = ?");){            
+            stm.setInt(1, idC);
+
+            return stm.executeUpdate();
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
     
 }

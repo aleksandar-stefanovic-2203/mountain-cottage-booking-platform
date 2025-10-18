@@ -23,7 +23,8 @@ export const routes: Routes = [
         {path: "cottages/:name", component: CottageDetailsComponent}
     ]},
     {path: "owner", component: OwnerComponent, children: [
-        {path: "profile/:username", component: ProfileComponent}
+        {path: "profile/:username", component: ProfileComponent},
+        {path: "cottages", component: CottagesComponent}
     ]},
     {path: "admin", component: AdminComponent, children: [
         {path: "profile/:username", component: ProfileComponent},

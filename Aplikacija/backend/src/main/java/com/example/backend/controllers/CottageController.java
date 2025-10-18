@@ -3,6 +3,7 @@ package com.example.backend.controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +30,9 @@ public class CottageController {
     public List<Cottage> getCottages(@RequestParam(required = false) String ownerUsername) {
         return new CottageRepo().getCottages(ownerUsername);
     }
-    
+
+    @DeleteMapping("/deleteCottage/{idC}")
+    public int deleteCottage(@PathVariable int idC){
+        return new CottageRepo().deleteCottage(idC);
+    }
 }

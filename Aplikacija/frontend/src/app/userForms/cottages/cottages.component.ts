@@ -19,12 +19,14 @@ export class CottagesComponent implements OnInit{
   private userService = inject(UserService)
   private activatedRoute = inject(ActivatedRoute)
   private router = inject(Router)
+
   ngOnInit(): void {
     let t = this.activatedRoute.snapshot.queryParamMap.get("type")
+    this.ownerUsername = this.activatedRoute.snapshot.queryParamMap.get("ownerUsername")
     if(t){
-      this.type = t      
+      this.type = t
     }
-    this.cottageService.getCottages().subscribe(data => {
+    this.cottageService.getCottages(this.ownerUsername).subscribe(data => {
       this.allCottages = this.selectedCottages = data
     })
     this.userService.getUserInfo().subscribe(data => {
@@ -199,6 +201,16 @@ export class CottagesComponent implements OnInit{
     this.router.navigate([`${cottage.name}`], {relativeTo: this.activatedRoute})
   }
 
+  deleteCottage(cottage: Cottage){
+    this.cottageService.deleteCottage(cottage.idC).subscribe(data => {
+      if(data === 1){
+        this.ngOnInit()
+      } else {
+        alert("Дошло је до грешке при брисању викендице!")
+      }
+    })
+  }
+
   selectedCottages: Cottage[] = []
   allCottages: Cottage[] = []
   userInfo: UserInfo = new UserInfo()
@@ -207,4 +219,5 @@ export class CottagesComponent implements OnInit{
   nameFilter = "none"
   locationFilter = "none"
   type = ""
+  ownerUsername: string | null = null
 }
