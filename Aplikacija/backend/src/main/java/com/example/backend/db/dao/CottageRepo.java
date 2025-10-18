@@ -13,6 +13,25 @@ import com.example.backend.models.Cottage;
 public class CottageRepo implements CottageRepoInterface {
 
     @Override
+    public Cottage getCottage(String name){
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM cottage WHERE name = ?");){            
+            stm.setString(1, name);
+
+            ResultSet rs = stm.executeQuery();
+
+            if(rs.next()){
+                return new Cottage(rs.getInt("idC"), rs.getString("name"), rs.getString("location"), rs.getString("services"), rs.getString("phoneNumber"), rs.getString("ownerUsername"));
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
     public List<Cottage> getCottages(String ownerUsername) {
         try(Connection con = DB.source().getConnection();
         PreparedStatement stm = con.prepareStatement("SELECT * FROM cottage" + ((ownerUsername != null) ? " WHERE ownerUsername = ?" : ""));){            

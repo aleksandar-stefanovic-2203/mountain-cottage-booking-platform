@@ -10,6 +10,7 @@ import com.example.backend.db.dao.CottageRepo;
 import com.example.backend.models.Cottage;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -17,6 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/cottages")
 @CrossOrigin(origins = "http://localhost:4200/")
 public class CottageController {
+
+    @GetMapping("/{name}")
+    public Cottage getCottage(@PathVariable String name) {
+        return new CottageRepo().getCottage(name);
+    }
+    
 
     @GetMapping("")
     public List<Cottage> getCottages(@RequestParam(required = false) String ownerUsername) {

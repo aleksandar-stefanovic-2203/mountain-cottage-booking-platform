@@ -4,18 +4,26 @@ import { Cottage } from '../../models/cottage';
 import { UserService } from '../../services/user.service';
 import { UserInfo } from '../../models/userinfo';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cottages',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './cottages.component.html',
   styleUrl: './cottages.component.css'
 })
 export class CottagesComponent implements OnInit{
   private cottageService = inject(CottageService)
   private userService = inject(UserService)
+  private activatedRoute = inject(ActivatedRoute)
+  private router = inject(Router)
   ngOnInit(): void {
+    let t = this.activatedRoute.snapshot.queryParamMap.get("type")
+    if(t){
+      this.type = t      
+    }
     this.cottageService.getCottages().subscribe(data => {
       this.allCottages = this.selectedCottages = data
     })
@@ -187,6 +195,10 @@ export class CottagesComponent implements OnInit{
     return value
   }
 
+  seeDetails(cottage: Cottage){
+    this.router.navigate([`${cottage.name}`], {relativeTo: this.activatedRoute})
+  }
+
   selectedCottages: Cottage[] = []
   allCottages: Cottage[] = []
   userInfo: UserInfo = new UserInfo()
@@ -194,4 +206,5 @@ export class CottagesComponent implements OnInit{
   location = ""
   nameFilter = "none"
   locationFilter = "none"
+  type = ""
 }

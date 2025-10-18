@@ -13,6 +13,10 @@ export class CottageService {
   
   private backPath = "http://localhost:8080/cottages"
 
+  getCottage(name: string){
+    return this.http.get<Cottage>(`${this.backPath}/${name}`)
+  }
+
   getCottages(username: string | null = null){
     return this.http.get<Cottage[]>(`${this.backPath}` + (username ? `?ownerUsername=${username}` : ``))
   }

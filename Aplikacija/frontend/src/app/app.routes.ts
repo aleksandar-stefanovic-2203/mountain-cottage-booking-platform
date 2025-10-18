@@ -10,6 +10,7 @@ import { ChangePasswordComponent } from './userForms/change-password/change-pass
 import { ProfileComponent } from './userForms/profile/profile.component';
 import { UserListComponent } from './userForms/user-list/user-list.component';
 import { CottagesComponent } from './userForms/cottages/cottages.component';
+import { CottageDetailsComponent } from './userForms/cottage-details/cottage-details.component';
 
 export const routes: Routes = [
     {path: "", component: UnregisteredUserComponent},
@@ -17,7 +18,9 @@ export const routes: Routes = [
     {path: "loginAdmin", component: LoginAdminComponent},
     {path: "register", component: RegisterComponent},
     {path: "tourist", component: TouristComponent, children: [
-        {path: "profile/:username", component: ProfileComponent}
+        {path: "profile/:username", component: ProfileComponent},
+        {path: "cottages", component: CottagesComponent},
+        {path: "cottages/:name", component: CottageDetailsComponent}
     ]},
     {path: "owner", component: OwnerComponent, children: [
         {path: "profile/:username", component: ProfileComponent}

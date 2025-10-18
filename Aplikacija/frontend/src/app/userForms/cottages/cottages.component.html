@@ -13,6 +13,7 @@
         <tr>
             <td>{{cottage.name}}</td>
             <td>{{cottage.location}}</td>
+            <td *ngIf="type === 'туриста'"><a (click)="seeDetails(cottage)">Детаљи</a></td>
         </tr>
     }
 </table>
