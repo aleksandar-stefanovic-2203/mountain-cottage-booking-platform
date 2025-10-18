@@ -4,5 +4,6 @@ export class Cottage {
     location = ""
     services = ""
     phoneNumber = ""
+    capacity = 0
     ownerUsername = ""
 }

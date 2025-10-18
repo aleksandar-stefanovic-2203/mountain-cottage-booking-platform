@@ -27,10 +27,25 @@ CREATE TABLE Cottage(
     location NVARCHAR(100) NOT NULL,
     services NVARCHAR(200),
     phoneNumber VARCHAR(100),
+    capacity INT NOT NULL,
     ownerUsername VARCHAR(20),
     FOREIGN KEY (ownerUsername) REFERENCES User(username) ON DELETE SET NULL
 );
 
-INSERT INTO Cottage (name, location, services, phoneNumber, ownerUsername) VALUES ('Апартмани Милинковић', 'Обућина Баре 150, 71423 Јахорина, Босна и Херцеговина', 'Паркинг, бесплатан интернет, Flat-screen TV, кухиња', '065 1222 567', 'Milena123');
-INSERT INTO Cottage (name, location, services, phoneNumber, ownerUsername) VALUES ('Горштак 1 и 2', 'Обућина Баре bb, 71423 Јахорина, Босна и Херцеговина', 'Бесплатан интернет, Flat-screen TV, кухиња, ски школа', '065 1222 567', 'Milena123');
-INSERT INTO Cottage (name, location, services, phoneNumber, ownerUsername) VALUES ('Olimpik House Jahorina', 'Olimpijska 46 Jahorina, 71423 Jahorina, Bosnia and Herzegovina', 'Паркинг, бесплатан интернет, доручак', '065 1234 890', 'gagson');
+INSERT INTO Cottage (name, location, services, phoneNumber, capacity, ownerUsername) VALUES ('Апартмани Милинковић', 'Обућина Баре 150, 71423 Јахорина, Босна и Херцеговина', 'Паркинг, бесплатан интернет, Flat-screen TV, кухиња', '065 1222 567', 10, 'Milena123');
+INSERT INTO Cottage (name, location, services, phoneNumber, capacity, ownerUsername) VALUES ('Горштак 1 и 2', 'Обућина Баре bb, 71423 Јахорина, Босна и Херцеговина', 'Бесплатан интернет, Flat-screen TV, кухиња, ски школа', '065 1222 567', 15, 'Milena123');
+INSERT INTO Cottage (name, location, services, phoneNumber, capacity, ownerUsername) VALUES ('Olimpik House Jahorina', 'Olimpijska 46 Jahorina, 71423 Jahorina, Bosnia and Herzegovina', 'Паркинг, бесплатан интернет, доручак', '065 1234 890', 8, 'gagson');
+
+CREATE TABLE RoomRate (
+	idRR INT PRIMARY KEY AUTO_INCREMENT,
+    periodName NVARCHAR(50) NOT NULL,
+    periodStart DATE NOT NULL,
+    periodEnd DATE NOT NULL,
+    priceAdult DECIMAL(10, 2) NOT NULL,
+    priceChild DECIMAL(10, 2) NOT NULL,
+    idC INT,
+    FOREIGN KEY (idC) REFERENCES Cottage(idC) ON DELETE CASCADE
+);
+
+INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('летњи', '2026-05-01', '2026-08-31', 3000, 1800, 1);
+INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('зимски', '2025-12-01', '2026-02-28', 4000, 3000, 1);

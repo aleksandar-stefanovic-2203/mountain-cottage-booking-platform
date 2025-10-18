@@ -6,14 +6,16 @@ public class Cottage {
     private String location;
     private String services;
     private String phoneNumber;
+    private int capacity;
     private String ownerUsername;
     
-    public Cottage(int idC, String name, String location, String services, String phoneNumber, String ownerUsername) {
+    public Cottage(int idC, String name, String location, String services, String phoneNumber, int capacity, String ownerUsername) {
         this.idC = idC;
         this.name = name;
         this.location = location;
         this.services = services;
         this.phoneNumber = phoneNumber;
+        this.capacity = capacity;
         this.ownerUsername = ownerUsername;
     }
 
@@ -63,6 +65,14 @@ public class Cottage {
 
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
     
 }

@@ -2,3 +2,22 @@
 Место: {{cottage.location}}<br>
 Услуге: {{cottage.services}}<br>
 Контакт телефон: {{cottage.phoneNumber}}<br>
+<hr>
+Доступност: <br>
+<table>
+    <tr>
+        <th>Период</th>
+        <th>Датум почетка</th>
+        <th>Датум завршетка</th>
+        <th colspan="2">Цена ноћења (одрасли/деца)</th>
+    </tr>
+    @for(roomrate of roomrates; track roomrate.idRR){
+        <tr>
+            <td>{{roomrate.periodName}}</td>
+            <td>{{roomrate.periodStart | date: "dd.MM.yyyy."}}</td>
+            <td>{{roomrate.periodEnd | date: "dd.MM.yyyy."}}</td>
+            <td>{{roomrate.priceAdult}}</td>
+            <td>{{roomrate.priceChild}}</td>
+        </tr>
+    }
+</table>

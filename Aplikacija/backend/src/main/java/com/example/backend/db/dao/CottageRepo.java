@@ -21,7 +21,7 @@ public class CottageRepo implements CottageRepoInterface {
             ResultSet rs = stm.executeQuery();
 
             if(rs.next()){
-                return new Cottage(rs.getInt("idC"), rs.getString("name"), rs.getString("location"), rs.getString("services"), rs.getString("phoneNumber"), rs.getString("ownerUsername"));
+                return new Cottage(rs.getInt("idC"), rs.getString("name"), rs.getString("location"), rs.getString("services"), rs.getString("phoneNumber"), rs.getInt("capacity"), rs.getString("ownerUsername"));
             }
 
         } catch (SQLException e){
@@ -41,7 +41,7 @@ public class CottageRepo implements CottageRepoInterface {
             List<Cottage> cottages = new ArrayList<>();
 
             while(rs.next()){
-                cottages.add(new Cottage(rs.getInt("idC"), rs.getString("name"), rs.getString("location"), rs.getString("services"), rs.getString("phoneNumber"), rs.getString("ownerUsername")));
+                cottages.add(new Cottage(rs.getInt("idC"), rs.getString("name"), rs.getString("location"), rs.getString("services"), rs.getString("phoneNumber"), rs.getInt("capacity"), rs.getString("ownerUsername")));
             }
 
             return cottages;
