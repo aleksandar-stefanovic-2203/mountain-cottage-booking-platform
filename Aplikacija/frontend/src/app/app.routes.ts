@@ -11,6 +11,7 @@ import { ProfileComponent } from './userForms/profile/profile.component';
 import { UserListComponent } from './userForms/user-list/user-list.component';
 import { CottagesComponent } from './userForms/cottages/cottages.component';
 import { CottageDetailsComponent } from './userForms/cottage-details/cottage-details.component';
+import { CottageFormComponent } from './userForms/cottage-form/cottage-form.component';
 
 export const routes: Routes = [
     {path: "", component: UnregisteredUserComponent},
@@ -24,7 +25,8 @@ export const routes: Routes = [
     ]},
     {path: "owner", component: OwnerComponent, children: [
         {path: "profile/:username", component: ProfileComponent},
-        {path: "cottages", component: CottagesComponent}
+        {path: "cottages", component: CottagesComponent},
+        {path: "cottages/:name", component: CottageFormComponent}
     ]},
     {path: "admin", component: AdminComponent, children: [
         {path: "profile/:username", component: ProfileComponent},

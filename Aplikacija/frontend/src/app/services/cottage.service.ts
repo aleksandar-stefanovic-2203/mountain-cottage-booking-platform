@@ -24,4 +24,16 @@ export class CottageService {
   deleteCottage(idC: number){
     return this.http.delete<number>(`${this.backPath}/deleteCottage/${idC}`)
   }
+
+  insertCottage(cottage: Cottage){
+    return this.http.post<number>(`${this.backPath}/insertCottage`, cottage)
+  }
+
+  checkFields(cottage: Cottage): string{
+    if(cottage.name === "" || cottage.location === ""){
+      return "Нису сва обавезна поља за викендицу попуњена! (назив и/или место викендице)"
+    }
+
+    return "Све је у реду"
+  }
 }

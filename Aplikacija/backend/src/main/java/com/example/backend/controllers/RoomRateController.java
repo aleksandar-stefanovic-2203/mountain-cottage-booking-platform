@@ -11,6 +11,9 @@ import com.example.backend.models.RoomRate;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -20,6 +23,11 @@ public class RoomRateController {
     @GetMapping("")
     public List<RoomRate> getRoomRates(@RequestParam int idC) {
         return new RoomRateRepo().getRoomRates(idC);
+    }
+    
+    @PostMapping("/insertRoomRates")
+    public int insertRoomRates(@RequestBody List<RoomRate> roomrates) {
+        return new RoomRateRepo().insertRoomRates(roomrates);
     }
     
 }

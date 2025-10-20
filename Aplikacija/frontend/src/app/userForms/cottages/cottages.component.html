@@ -14,7 +14,9 @@
             <td>{{cottage.name}}</td>
             <td>{{cottage.location}}</td>
             <td *ngIf="type === 'туриста'"><a (click)="seeDetails(cottage)">Детаљи</a></td>
+            <td *ngIf="type === 'власник'"><button (click)="editCottage(cottage)">Измени</button></td>
             <td *ngIf="type === 'власник'"><button (click)="deleteCottage(cottage)">Обриши</button></td>
         </tr>
     }
 </table>
+<app-cottage-form (refresh)="refreshPage()" *ngIf="type === 'власник'" operation="insert" [ownerUsername]="ownerUsername"></app-cottage-form>

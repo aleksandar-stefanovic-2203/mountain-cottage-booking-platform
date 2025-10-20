@@ -23,11 +23,11 @@ export class LoginComponent {
 
   login(): void{
     if(this.username == ""){
-      this.message = this.message = "Поље за корисничко име је празно!"
+      this.message = "Поље за корисничко име је празно!"
       return
     } 
     if(this.password == ""){
-      this.message = this.message = "Поље за лозинку је празно!"
+      this.message = "Поље за лозинку је празно!"
       return
     }
     else {      

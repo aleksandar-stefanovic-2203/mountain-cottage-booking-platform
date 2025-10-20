@@ -6,11 +6,12 @@ import { UserInfo } from '../../models/userinfo';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CottageFormComponent } from '../cottage-form/cottage-form.component';
 
 @Component({
   selector: 'app-cottages',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CottageFormComponent],
   templateUrl: './cottages.component.html',
   styleUrl: './cottages.component.css'
 })
@@ -209,6 +210,14 @@ export class CottagesComponent implements OnInit{
         alert("Дошло је до грешке при брисању викендице!")
       }
     })
+  }
+
+  editCottage(cottage: Cottage){
+    this.router.navigate([`${cottage.name}`], {relativeTo: this.activatedRoute})
+  }
+
+  refreshPage(){
+    this.ngOnInit()
   }
 
   selectedCottages: Cottage[] = []

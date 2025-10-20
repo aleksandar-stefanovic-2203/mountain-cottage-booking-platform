@@ -8,4 +8,5 @@ public interface CottageRepoInterface {
     public Cottage getCottage(String name);
     public List<Cottage> getCottages(String ownerUsername);
     public int deleteCottage(int idC);
+    public int insertCottage(Cottage cottage);
 }

@@ -49,3 +49,10 @@ CREATE TABLE RoomRate (
 
 INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('летњи', '2026-05-01', '2026-08-31', 3000, 1800, 1);
 INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('зимски', '2025-12-01', '2026-02-28', 4000, 3000, 1);
+
+CREATE TABLE Picture (
+	idP INT PRIMARY KEY AUTO_INCREMENT,
+    picture MEDIUMBLOB NOT NULL,
+    idC INT,
+    FOREIGN KEY (idC) REFERENCES Cottage(idC) ON DELETE CASCADE
+);
