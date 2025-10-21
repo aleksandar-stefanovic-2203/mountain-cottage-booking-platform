@@ -29,6 +29,10 @@ export class CottageService {
     return this.http.post<number>(`${this.backPath}/insertCottage`, cottage)
   }
 
+  updateCottage(cottage: Cottage){
+    return this.http.put<number>(`${this.backPath}/updateCottage`, cottage)
+  }
+
   checkFields(cottage: Cottage): string{
     if(cottage.name === "" || cottage.location === ""){
       return "Нису сва обавезна поља за викендицу попуњена! (назив и/или место викендице)"

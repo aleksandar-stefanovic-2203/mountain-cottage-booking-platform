@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -28,6 +30,11 @@ public class RoomRateController {
     @PostMapping("/insertRoomRates")
     public int insertRoomRates(@RequestBody List<RoomRate> roomrates) {
         return new RoomRateRepo().insertRoomRates(roomrates);
+    }
+
+    @PutMapping("updateRoomRates")
+    public int updateRoomRates(@RequestBody List<RoomRate> roomrates) {
+        return new RoomRateRepo().updateRoomRates(roomrates);
     }
     
 }

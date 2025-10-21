@@ -33,4 +33,8 @@ export class RoomrateService {
   insertRoomRates(roomrates: RoomRate[]){
     return this.http.post<number>(`${this.backPath}/insertRoomRates`, roomrates)
   }
+
+  updateRoomRates(roomrates: RoomRate[]){
+    return this.http.put<number>(`${this.backPath}/updateRoomRates`, roomrates)
+  }
 }

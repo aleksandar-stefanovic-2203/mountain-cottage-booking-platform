@@ -58,5 +58,30 @@ public class RoomRateRepo implements RoomRateRepoInterface {
 
         return 0;
     }
+
+    @Override
+    public int updateRoomRates(List<RoomRate> roomrates) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("UPDATE roomrate SET periodName = ?, periodStart = ?, periodEnd = ?, priceAdult = ?, priceChild = ? WHERE idRR = ?");){
+            for(RoomRate roomrate: roomrates){
+                stm.setString(1, roomrate.getPeriodName());
+                stm.setDate(2, roomrate.getPeriodStart());
+                stm.setDate(3, roomrate.getPeriodEnd());
+                stm.setDouble(4, roomrate.getPriceAdult());
+                stm.setDouble(5, roomrate.getPriceChild());
+                stm.setInt(6, roomrate.getIdRR());
+
+                int value = stm.executeUpdate();
+                if(value == 0) return 0;
+            }
+
+            return 1;
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
     
 }

@@ -94,5 +94,25 @@ public class CottageRepo implements CottageRepoInterface {
 
         return 0;
     }
+
+    @Override
+    public int updateCottage(Cottage cottage) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("UPDATE cottage SET name = ?, location = ?, services = ?, phoneNumber = ?, capacity = ? WHERE idC = ?");){                                                
+            stm.setString(1, cottage.getName());
+            stm.setString(2, cottage.getLocation());
+            stm.setString(3, cottage.getServices());
+            stm.setString(4, cottage.getPhoneNumber());
+            stm.setInt(5, cottage.getCapacity());
+            stm.setInt(6, cottage.getIdC());
+
+            return stm.executeUpdate();
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
     
 }
