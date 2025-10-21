@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,7 @@ export class PictureService {
   }
 
   insertPictures(files: File[], idC: number) {
+    if(files.length === 0) return of(1);
     const formData = new FormData()
 
     formData.append("idC", JSON.stringify(idC))
