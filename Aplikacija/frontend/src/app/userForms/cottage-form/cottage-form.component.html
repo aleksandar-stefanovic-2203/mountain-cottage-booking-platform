@@ -30,10 +30,12 @@
         </tr>
     }
 </table>
-<br>
-Слике: <br>
-@for(imgUrl of imgUrls; track imgUrl){
-    <img [src]="imgUrl">
+@if(operation === 'update'){
+    <br>
+    Слике: <br>
+    @for(imgUrl of imgUrls; track imgUrl){
+        <img [src]="imgUrl">
+    }
 }
 <br>
 Унесите слике викендице: <input type="file" multiple (change)="changePicture($event)" accept="image/*"><br>

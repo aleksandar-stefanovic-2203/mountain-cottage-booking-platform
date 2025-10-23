@@ -5,3 +5,9 @@
 input[type="text"] {
     width: 500px;
 }
+
+img {
+    max-width: 300px;
+    max-height: 300px;
+    display: inline;
+}
