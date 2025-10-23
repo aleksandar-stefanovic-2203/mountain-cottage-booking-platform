@@ -31,6 +31,11 @@
     }
 </table>
 <br>
+Слике: <br>
+@for(imgUrl of imgUrls; track imgUrl){
+    <img [src]="imgUrl">
+}
+<br>
 Унесите слике викендице: <input type="file" multiple (change)="changePicture($event)" accept="image/*"><br>
 <button *ngIf="operation === 'insert'" (click)="insertCottage()">Унеси податке</button>
 <button *ngIf="operation === 'update'" (click)="updateCottage()">Измени податке</button>

@@ -8,6 +8,8 @@ import { RoomRate } from '../../models/roomrate';
 import { CommonModule, DatePipe } from '@angular/common';
 import { PictureService } from '../../services/picture.service';
 import { Router } from '@angular/router';
+import { PictureWrapper } from '../../models/picturewrapper';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-cottage-form',
@@ -28,6 +30,7 @@ export class CottageFormComponent implements OnInit {
   private cottageService = inject(CottageService)
   private roomrateService = inject(RoomrateService)
   private pictureService = inject(PictureService)
+  private userService = inject(UserService)
   private router = inject(Router)
   
   ngOnInit(): void {
@@ -41,6 +44,10 @@ export class CottageFormComponent implements OnInit {
             this.roomrates[i] = data[i]
           }
           this.numberOfRoomRates = data.length
+        })
+        this.pictureService.getPictures(this.cottage.idC).subscribe(data => {
+          this.cottagePictures = data;
+          this.imgUrls = this.cottagePictures.map(cottagePicture => this.userService.loadImg(cottagePicture.pictureBytes))          
         })
       })
     }
@@ -148,6 +155,8 @@ export class CottageFormComponent implements OnInit {
   cottage: Cottage = new Cottage()
   roomrates: RoomRate[] = Array.from({length: this.maxNumberOfRoomRates}, (value, index) => index >= 2 ? new RoomRate() : new RoomRate(index === 0 ? "летњи" : "зимски"))
   pictures: File[] = []
+  cottagePictures: PictureWrapper[] = []
+  imgUrls: string[] = []
 
   message = ""
 }

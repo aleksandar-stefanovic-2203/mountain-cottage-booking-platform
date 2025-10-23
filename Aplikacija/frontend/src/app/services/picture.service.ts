@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
+import { PictureWrapper } from '../models/picturewrapper';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,9 @@ export class PictureService {
     })
 
     return this.http.post<number>(`${this.backPath}/insertPictures`, formData)
+  }
+
+  getPictures(idC: number){
+    return this.http.get<PictureWrapper[]>(`${this.backPath}/${idC}`)
   }
 }
