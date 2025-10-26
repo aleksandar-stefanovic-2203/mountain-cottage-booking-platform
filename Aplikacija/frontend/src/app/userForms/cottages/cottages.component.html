@@ -1,6 +1,17 @@
-Укупан број викендица: {{allCottages.length}}<br>
-Укупан број власника: {{userInfo.numOfOwners}}<br>
-Укупан број туриста: {{userInfo.numOfTourists}}<br>
+<div class="boxes">
+    <div class="box">
+        <div>Викендице</div>
+        <div>{{allCottages.length}}</div>
+    </div>
+    <div class="box">
+        <div>Власници</div>
+        <div>{{userInfo.numOfOwners}}</div>
+    </div>
+    <div class="box">
+        <div>Туристи</div>
+        <div>{{userInfo.numOfTourists}}</div>
+    </div>
+</div>
 <hr>
 Претражи по називу: <input type="text" [(ngModel)]="name" (input)="onChange()"><br>
 Претражи по месту: <input type="text" [(ngModel)]="location" (input)="onChange()"><br><br>
@@ -8,6 +19,9 @@
     <tr>
         <th><a (click)="sortByName()">{{getNameLabel()}}</a></th>
         <th><a (click)="sortByLocation()">{{getLocationLabel()}}</a></th>
+        <th *ngIf="type === 'туриста'"></th>
+        <th *ngIf="type === 'власник'"></th>
+        <th *ngIf="type === 'власник'"></th>
     </tr>
     @for(cottage of selectedCottages; track cottage.idC){
         <tr>

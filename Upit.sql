@@ -49,6 +49,10 @@ CREATE TABLE RoomRate (
 
 INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('летњи', '2026-05-01', '2026-08-31', 3000, 1800, 1);
 INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('зимски', '2025-12-01', '2026-02-28', 4000, 3000, 1);
+INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('летњи', '2026-05-01', '2026-08-31', 3000, 1800, 2);
+INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('зимски', '2025-12-01', '2026-02-28', 4000, 3000, 2);
+INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('летњи', '2026-05-01', '2026-08-31', 3000, 1800, 3);
+INSERT INTO RoomRate(periodName, periodStart, periodEnd, priceAdult, priceChild, idC) VALUES ('зимски', '2025-12-01', '2026-02-28', 4000, 3000, 3);
 
 CREATE TABLE Picture (
 	idP INT PRIMARY KEY AUTO_INCREMENT,

@@ -51,7 +51,7 @@ export class OwnerReservationsComponent implements OnInit {
   }
 
   reject(reservation: Reservation){
-    if(reservation.comment === ""){
+    if(reservation.comment === "" || reservation.comment === null){
       this.message = "Код одбијенице мора да се унесе коментар!"
       return
     }

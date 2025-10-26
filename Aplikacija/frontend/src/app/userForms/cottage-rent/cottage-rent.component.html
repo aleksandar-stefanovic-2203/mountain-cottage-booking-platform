@@ -1,15 +1,46 @@
-Назив викендице: {{cottage.name}}<br>
-Почетак резервације: <input [disabled]="step === 2" type="datetime-local" [(ngModel)]="reservation.startDate"><br>
-Крај резервације: <input [disabled]="step === 2" type="datetime-local" [(ngModel)]="reservation.endDate"><br>
-Број одраслих особа: <input [disabled]="step === 2" type="number" min="0" [(ngModel)]="reservation.numberOfAdults"><br>
-Број деце: <input [disabled]="step === 2" type="number" min="0" [(ngModel)]="reservation.numberOfChildren"><br>
-
-@if(step === 2){    
-    Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber" (input)="onChange()"><img [src]="imgUrl"><br>
-    Укупна цена: {{this.reservation.price}}<br>
-    Додатни захтеви: <textarea rows="5" cols="30" [(ngModel)]="reservation.additionalRequests"></textarea><br>
-}
-
+<table>
+    <tr>
+        <td>Назив викендице:</td>
+        <td>{{cottage.name}}</td>
+    </tr>
+    <tr>
+        <td>Почетак резервације:</td>
+        <td><input [disabled]="step === 2" type="datetime-local" [(ngModel)]="reservation.startDate"></td>
+    </tr>
+    <tr>
+        <td>Крај резервације:</td>
+        <td><input [disabled]="step === 2" type="datetime-local" [(ngModel)]="reservation.endDate"></td>
+    </tr>
+    <tr>
+        <td>Број одраслих особа:</td>
+        <td><input [disabled]="step === 2" type="number" min="0" [(ngModel)]="reservation.numberOfAdults"></td>
+    </tr>
+    <tr>
+        <td>Број деце:</td>
+        <td><input [disabled]="step === 2" type="number" min="0" [(ngModel)]="reservation.numberOfChildren"></td>
+    </tr>
+    @if(step === 2){
+    <tr>
+        <td>Број кредитне картице:</td>
+        <td>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" [(ngModel)]="user.creditCardNumber" (input)="onChange()">
+                <img [src]="imgUrl" style="height: 30px;">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>Укупна цена:</td>
+        <td>{{this.reservation.price}}</td>
+    </tr>
+    <tr>
+        <td>Додатни захтеви:</td>
+        <td><textarea rows="5" cols="30" [(ngModel)]="reservation.additionalRequests"></textarea></td>
+    </tr>
+    }
+</table>
+<br>
 <button (click)="changeStep()">{{step === 1 ? "Следећи корак" : "Претходни корак"}}</button>
-<button *ngIf="step === 2" (click)="reserve()">Резервиши</button><br>
+<button *ngIf="step === 2" (click)="reserve()">Резервиши</button>
+<br>
 {{message}}

@@ -18,8 +18,10 @@ export class OwnerComponent {
   ngOnInit(): void {
     this.userService.fetchUser().subscribe(data => {
       this.user = data
+      this.imgUrl = this.userService.loadImg(this.user.profilePictureBytes)
     })
   }
 
   user: User = new User()
+  imgUrl: string = ""
 }

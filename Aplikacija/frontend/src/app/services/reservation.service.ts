@@ -17,8 +17,8 @@ export class ReservationService {
     return this.http.post<number>(`${this.backPath}/reserve`, reservation)
   }
 
-  getReservations(touristUsername: string){
-    return this.http.get<Reservation[]>(`${this.backPath}?touristUsername=${touristUsername}`)
+  getReservations(touristUsername: string | null){
+    return this.http.get<Reservation[]>(`${this.backPath}` + ((touristUsername != null) ? `?touristUsername=${touristUsername}` : ""))
   }
 
   getReservationsOwner(ownerUsername: string){

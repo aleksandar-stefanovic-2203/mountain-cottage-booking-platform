@@ -11,7 +11,7 @@
 Телефон: <input type="text" [(ngModel)]="cottage.phoneNumber"><br>
 Капацитет: <input type="number" [(ngModel)]="cottage.capacity" min="0"><br>
 Доступност (морају да се унесу бар 2 ценовника ноћења): <br>
-<table> <!--TODO додати form елемент!!! -->
+<table>
     <tr>
         <th></th>
         <th>Период</th>
@@ -30,12 +30,14 @@
         </tr>
     }
 </table>
-@if(operation === 'update'){
+@if(operation === "update"){
     <br>
     Слике: <br>
-    @for(imgUrl of imgUrls; track imgUrl){
-        <img [src]="imgUrl">
-    }
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        @for(imgUrl of imgUrls; let i = $index; track i){
+            <img [src]="imgUrl" style="width: 100%; height: auto;">
+        }
+    </div>
 }
 <br>
 Унесите слике викендице: <input type="file" multiple (change)="changePicture($event)" accept="image/*"><br>

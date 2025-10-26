@@ -13,13 +13,15 @@ import { LogoutComponent } from '../../logout/logout.component';
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
-export class AdminComponent implements OnInit { //TODO: Додати guard-ове за руте!!!
+export class AdminComponent implements OnInit {
   private userService = inject(UserService)
   ngOnInit(): void {
     this.userService.fetchUser().subscribe(data => {
-      this.user = data      
+      this.user = data
+      this.imgUrl = this.userService.loadImg(this.user.profilePictureBytes)
     })
   }
 
-  user: User = new User()  
+  user: User = new User()
+  imgUrl: string = ""  
 }

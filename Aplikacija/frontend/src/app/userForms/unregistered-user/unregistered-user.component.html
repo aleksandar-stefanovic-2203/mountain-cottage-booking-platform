@@ -1,5 +1,22 @@
-<header style="text-align: right;">
+<header style="text-align: right; padding-right: 1rem;">
     <a routerLink="/login">Улогуј се</a>&nbsp;
     <a routerLink="/register">Региструј се</a>
 </header>
+<h1 style="text-align: center; margin: 1rem 0;">Добродошли у планинску викендицу!</h1>
+Број резервисаних викендица у последњих: <br>
+<div class="boxes">
+    <div class="box">
+        <div>24 сата</div>
+        <div>{{getNumberOfReservations(1)}}</div>
+    </div>
+    <div class="box">
+        <div>7 дана</div>
+        <div>{{getNumberOfReservations(7)}}</div>
+    </div>
+    <div class="box">
+        <div>30 дана</div>
+        <div>{{getNumberOfReservations(30)}}</div>
+    </div>
+</div>
+<hr>
 <app-cottages></app-cottages>

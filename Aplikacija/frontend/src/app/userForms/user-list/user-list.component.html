@@ -1,4 +1,4 @@
-Списак свих корисника:
+Списак свих корисника:<br><br>
 <table>
     <tr>
         <th>Корисничко име</th>
@@ -11,9 +11,11 @@
         <th>Број кредитне картице</th>
         <th>Тип</th>
         <th>Статус</th>
+        <th></th>
+        <th></th>
     </tr>
     @for(user of users; track user.username){
-        <tr [ngStyle]="{'background-color': user.status === 'активан' ? 'green' : 'red'}">
+        <tr [ngStyle]="{'background-color': user.status === 'активан' ? '#90EE90' : '#FFB6C1'}">
             <td>{{user.username}}</td>
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
@@ -30,7 +32,7 @@
     }
 </table>
 <hr>
-Захтеви за регистрацију:
+Захтеви за регистрацију:<br><br>
 <table>
     <tr>
         <th>Корисничко име</th>
@@ -42,6 +44,8 @@
         <th>Контакт телефон</th>
         <th>Број кредитне картице</th>
         <th>Тип корисника</th>
+        <th></th>
+        <th></th>
     </tr>
     @for(registrationRequest of registrationRequests; track registrationRequest.username){
         <tr>
@@ -54,7 +58,8 @@
             <td>{{registrationRequest.phoneNumber}}</td>
             <td>{{registrationRequest.creditCardNumber}}</td>
             <td>{{registrationRequest.type}}</td>
-            <td><button (click)="accept(registrationRequest)">Прихвати</button><button (click)="reject(registrationRequest)">Одбиј</button></td>
+            <td><button (click)="accept(registrationRequest)">Прихвати</button></td>
+            <td><button (click)="reject(registrationRequest)">Одбиј</button></td>
         </tr>
     }
 </table>

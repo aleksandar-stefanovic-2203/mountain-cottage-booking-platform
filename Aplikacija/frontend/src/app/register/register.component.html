@@ -1,23 +1,65 @@
-<h1>Региструј се као корисник:</h1>
-Корисничко име: <input type="text" [(ngModel)]="user.username"><br>
-Лозинка: <input type="password" [(ngModel)]="user.password"><br>
-Име: <input type="text" [(ngModel)]="user.firstName"><br>
-Презиме: <input type="text" [(ngModel)]="user.lastName"><br>
-Пол: 
-    <select [(ngModel)]="user.gender">        
-        <option>мушки</option>
-        <option>женски</option>
-        <option>друго</option>
-    </select><br>
-Адреса: <input type="text" [(ngModel)]="user.address"><br>
-Контакт телефон: <input type="text" [(ngModel)]="user.phoneNumber"><br>
-И-мејл адреса: <input type="text" [(ngModel)]="user.email"><br>
-Профилна слика: <input type="file" (change)="changePicture($event)" accept="image/*"><br>
-Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber" (input)="onChange()"><img [src]="imgUrl"><br>
-Тип корисника: 
-    <select [(ngModel)]="user.type">
-        <option>туриста</option>
-        <option>власник</option>
-    </select><br>
-<button (click)="register()">Региструј се</button><br>
-<span style="color: red;">{{message}}</span>
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; width: 50%; margin: auto">
+    <h1>Региструј се:</h1>
+    <table>
+        <tr>
+            <td>Корисничко име:</td>
+            <td><input type="text" [(ngModel)]="user.username"></td>
+        </tr>
+        <tr>
+            <td>Лозинка:</td>
+            <td><input type="password" [(ngModel)]="user.password"></td>
+        </tr>
+        <tr>
+            <td>Име:</td>
+            <td><input type="text" [(ngModel)]="user.firstName"></td>
+        </tr>
+        <tr>
+            <td>Презиме:</td>
+            <td><input type="text" [(ngModel)]="user.lastName"></td>
+        </tr>
+        <tr>
+            <td>Пол:</td>
+            <td>
+                <select [(ngModel)]="user.gender">        
+                    <option>мушки</option>
+                    <option>женски</option>
+                    <option>друго</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Адреса:</td>
+            <td><input type="text" [(ngModel)]="user.address"></td>
+        </tr>
+        <tr>
+            <td>Контакт телефон:</td>
+            <td><input type="text" [(ngModel)]="user.phoneNumber"></td>
+        </tr>
+        <tr>
+            <td>И-мејл адреса:</td>
+            <td><input type="text" [(ngModel)]="user.email"></td>
+        </tr>
+        <tr>
+            <td>Профилна слика:</td>
+            <td><input type="file" (change)="changePicture($event)" accept="image/*"></td>
+        </tr>
+        <tr>
+            <td>Број кредитне картице:</td>
+            <td>
+                <input class="ccn" type="text" [(ngModel)]="user.creditCardNumber" (input)="onChange()">
+                <img [src]="imgUrl" style="vertical-align: middle;">
+            </td>
+        </tr>
+        <tr>
+            <td>Тип корисника:</td>
+            <td>
+                <select [(ngModel)]="user.type">
+                    <option>туриста</option>
+                    <option>власник</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button style="margin-top: 20px;" (click)="register()">Региструј се</button>
+    <span style="color: red; margin-top: 10px;">{{message}}</span>
+</div>

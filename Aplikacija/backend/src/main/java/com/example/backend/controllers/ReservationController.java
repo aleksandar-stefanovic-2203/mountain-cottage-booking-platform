@@ -30,7 +30,7 @@ public class ReservationController {
     }
     
     @GetMapping
-    public List<Reservation> getReservations(@RequestParam String touristUsername) {
+    public List<Reservation> getReservations(@RequestParam(required = false) String touristUsername) {
         return new ReservationRepo().getReservations(touristUsername);
     }
     

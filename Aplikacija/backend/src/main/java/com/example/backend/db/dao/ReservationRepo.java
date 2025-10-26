@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.backend.db.DB;
-import com.example.backend.models.Cottage;
 import com.example.backend.models.Reservation;
-import com.example.backend.models.User;
 
 public class ReservationRepo implements ReservationRepoInterface {
 
@@ -64,8 +62,8 @@ public class ReservationRepo implements ReservationRepoInterface {
     @Override
     public List<Reservation> getReservations(String touristUsername) {
         try(Connection con = DB.source().getConnection();
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM reservation WHERE BINARY touristUsername = ?");){
-            stm.setString(1, touristUsername);
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM reservation" + ((touristUsername != null) ? " WHERE BINARY touristUsername = ?" : ""));){
+            if(touristUsername != null) stm.setString(1, touristUsername);
 
             ResultSet rs = stm.executeQuery();
 

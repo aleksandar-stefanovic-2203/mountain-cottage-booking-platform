@@ -1,14 +1,95 @@
+table, input:not([type="file"]), header, button, select, textarea {    
+    border: 2px solid #917b64;
+    border-collapse: separate;
+    border-radius: 10px;
+    background-color: #FFFDF8;
+    font-family: 'Oswald';
+    letter-spacing: 0.05em;
+}
+
 a {
     cursor: pointer;
-    color: blue;
+    color: #7A6C5D;
     text-decoration: underline;
 }
 
 a:hover {
-    color: red;
+    color: #29241f;
 }
 
-table, tr, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+textarea {
+    resize: none;
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    font-family: 'Oswald';
+    letter-spacing: 0.05em;
+}
+
+button:hover {
+    background-color: #E6D5C3;
+}
+
+button:active {
+    background-color: #D9B79C;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #917b64;
+}
+
+th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #E6D5C3;
+    border-right: 1px solid #E6D5C3;
+    text-align: left;
+}
+
+th:last-child, td:last-child {
+    border-right: none;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid #917b64;
+    margin: 2rem 0;
+}
+
+body {
+    background-color: #FFE8D6;
+    color: #4B3F36;
+    font-family: 'Oswald';
+    letter-spacing: 0.05em;
+}
+
+.boxes {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.box {
+    border: 2px solid #917b64;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    flex: 1;
+}
+
+.box div:last-child {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
 }

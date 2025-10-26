@@ -23,8 +23,10 @@
 </table>
 <br>
 Слике: <br>
-@for(imgUrl of imgUrls; track imgUrl){
-    <img [src]="imgUrl">
-}
+<div class="image-grid">
+    @for(imgUrl of imgUrls; track imgUrl){
+        <img [src]="imgUrl">
+    }
+</div>
 <br>
 <button (click)="rentCottage()">Изнајми викендицу</button>

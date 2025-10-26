@@ -26,7 +26,7 @@ export class UserService {
   }
 
   checkPassword(password: string): boolean {
-    let regExpr = /^(?=.{6,10}$)(?=[A-Za-z])(?=.*[A-Z])(?=(?:.*[a-z].*){3,})(?=.*\d)(?=.*[^A-Za-z0-9]).*$/ //TODO Научити регуларне изразе!
+    let regExpr = /^(?=.{6,10}$)(?=[A-Za-z])(?=.*[A-Z])(?=(?:.*[a-z].*){3,})(?=.*\d)(?=.*[^A-Za-z0-9]).*$/
     return regExpr.test(password)
   }
 
@@ -40,7 +40,7 @@ export class UserService {
 
   // TODO Искоментарисати цео пројекат!!!
   checkImage(file: File): Promise<boolean> {
-    const allowedTypes = ['image/jpeg', 'image/png']; //TODO Негде сам ставио да се прихвата само jpeg, не могу да се сетим где, то треба исправити!
+    const allowedTypes = ['image/jpeg', 'image/png'];
     if(!allowedTypes.includes(file.type)) return Promise.resolve(false);
 
     return new Promise((resolve) => {
@@ -180,7 +180,7 @@ export class UserService {
   loadImg(strBytes: string | null): string {
     if(strBytes){
       const bytes = this.stringToBytes(strBytes)
-      return this.bytesToImage(bytes) //TODO Деалоцирање ресурса! (URL.revokeObjectURL(imgUrl))
+      return this.bytesToImage(bytes)
     }
 
     return ""
