@@ -1,13 +1,18 @@
 package com.example.backend.db.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.backend.db.DB;
+import com.example.backend.models.Reservation;
 import com.example.backend.models.RoomRate;
 
 public class RoomRateRepo implements RoomRateRepoInterface {
@@ -82,6 +87,35 @@ public class RoomRateRepo implements RoomRateRepoInterface {
         }
 
         return 0;
+    }
+
+    @Override
+    public double getPrice(Reservation reservation, int idC) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("SELECT priceAdult, priceChild FROM roomrate WHERE idC = ? AND ? >= periodStart AND ? <= periodEnd");){
+            double result = 0;
+            int numberOfAdults = reservation.getNumberOfAdults();
+            int numberOfChildren = reservation.getNumberOfChildren();
+            stm.setInt(1, idC);
+            for(LocalDateTime currDate = reservation.getStartDate(); currDate.isBefore(reservation.getEndDate()); currDate = currDate.plusDays(1)){
+                stm.setObject(2, currDate.toLocalDate());
+                stm.setObject(3, currDate.toLocalDate());
+
+                ResultSet rs = stm.executeQuery();
+                if(rs.next()){
+                    double priceAdult = rs.getDouble("priceAdult");
+                    double priceChild = rs.getDouble("priceChild");
+                    result += numberOfAdults * priceAdult + numberOfChildren * priceChild;
+                } else return -1;
+            }
+
+            return result;
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return -1;
     }
     
 }

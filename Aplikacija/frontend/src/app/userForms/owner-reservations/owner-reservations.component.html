@@ -1,0 +1,35 @@
+<table>
+    <tr>
+        <th>Туриста</th>
+        <th>Датум резервације</th>
+        <th>Датум почетка резервације</th>
+        <th>Датум краја резервације</th>
+        <th>Број одраслих особа</th>
+        <th>Број деце</th>
+        <th>Назив викендице</th>
+        <th>Место викендице</th>
+        <th>Цена</th>
+        <th>Додатни захтеви</th>
+        <th>Статус</th>
+        <th>Коментар</th>
+    </tr>
+    @for(reservation of newReservations; track reservation.idR){
+        <tr>
+            <td>{{reservation.touristUsername}}</td>
+            <td>{{reservation.reservationDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{reservation.startDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{reservation.endDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{reservation.numberOfAdults}}</td>
+            <td>{{reservation.numberOfChildren}}</td>
+            <td>{{getCottageName(reservation.idC)}}</td>
+            <td>{{getCottageLocation(reservation.idC)}}</td>
+            <td>{{reservation.price}}</td>
+            <td><textarea rows="5" disabled="true" [(ngModel)]="reservation.additionalRequests"></textarea></td>
+            <td>{{reservation.status}}</td>
+            <td><textarea rows="5" [(ngModel)]="reservation.comment"></textarea></td>
+            <td><button (click)="accept(reservation)">Потврди</button></td>
+            <td><button (click)="reject(reservation)">Одбиј</button></td>
+        </tr>
+    }
+</table>
+{{message}}

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { RoomRate } from '../models/roomrate';
+import { Reservation } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,9 @@ export class RoomrateService {
 
   updateRoomRates(roomrates: RoomRate[]){
     return this.http.put<number>(`${this.backPath}/updateRoomRates`, roomrates)
+  }
+
+  getPrice(idC: number, reservation: Reservation){
+    return this.http.post<number>(`${this.backPath}/getPrice/${idC}`, reservation)
   }
 }

@@ -12,6 +12,9 @@ import { UserListComponent } from './userForms/user-list/user-list.component';
 import { CottagesComponent } from './userForms/cottages/cottages.component';
 import { CottageDetailsComponent } from './userForms/cottage-details/cottage-details.component';
 import { CottageFormComponent } from './userForms/cottage-form/cottage-form.component';
+import { CottageRentComponent } from './userForms/cottage-rent/cottage-rent.component';
+import { TouristReservationsComponent } from './userForms/tourist-reservations/tourist-reservations.component';
+import { OwnerReservationsComponent } from './userForms/owner-reservations/owner-reservations.component';
 
 export const routes: Routes = [
     {path: "", component: UnregisteredUserComponent},
@@ -21,12 +24,15 @@ export const routes: Routes = [
     {path: "tourist", component: TouristComponent, children: [
         {path: "profile/:username", component: ProfileComponent},
         {path: "cottages", component: CottagesComponent},
-        {path: "cottages/:name", component: CottageDetailsComponent}
+        {path: "cottages/:name", component: CottageDetailsComponent},
+        {path: "cottages/:name/rentCottage", component: CottageRentComponent},
+        {path: "reservations", component: TouristReservationsComponent}
     ]},
     {path: "owner", component: OwnerComponent, children: [
         {path: "profile/:username", component: ProfileComponent},
         {path: "cottages", component: CottagesComponent},
-        {path: "cottages/:name", component: CottageFormComponent}
+        {path: "cottages/:name", component: CottageFormComponent},
+        {path: "reservations", component: OwnerReservationsComponent}
     ]},
     {path: "admin", component: AdminComponent, children: [
         {path: "profile/:username", component: ProfileComponent},

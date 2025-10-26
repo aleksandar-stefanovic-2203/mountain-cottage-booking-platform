@@ -1,7 +1,8 @@
 <h1>Туриста</h1>
 <hr>
 <a [routerLink]="['profile', user.username]">Профил</a>&nbsp;
-<a [routerLink]="['cottages']" [queryParams]="{type: 'туриста'}">Викендице</a>
+<a [routerLink]="['cottages']" [queryParams]="{type: 'туриста'}">Викендице</a>&nbsp;
+<a [routerLink]="['reservations']">Резервације</a>
 <hr>
 <router-outlet></router-outlet>
 <app-logout></app-logout>

@@ -56,3 +56,20 @@ CREATE TABLE Picture (
     idC INT,
     FOREIGN KEY (idC) REFERENCES Cottage(idC) ON DELETE CASCADE
 );
+
+CREATE TABLE Reservation (
+	idR INT PRIMARY KEY AUTO_INCREMENT,
+	reservationDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    startDate DATETIME NOT NULL,
+    endDate DATETIME NOT NULL,
+    numberOfAdults INT NOT NULL,
+    numberOfChildren INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    idC INT NOT NULL,
+    touristUsername VARCHAR(20) NOT NULL,
+    additionalRequests NVARCHAR(500),
+    status NVARCHAR(10) NOT NULL CHECK (status IN ('непознат', 'прихваћена', 'одбијена')),
+    comment NVARCHAR(200),
+    FOREIGN KEY (idC) REFERENCES Cottage(idC) ON DELETE CASCADE,
+    FOREIGN KEY (touristUsername) REFERENCES User(username) ON DELETE CASCADE
+);

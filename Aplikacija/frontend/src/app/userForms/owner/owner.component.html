@@ -1,6 +1,7 @@
 <h1>Власник</h1>
 <hr>
 <a [routerLink]="['profile', user.username]">Профил</a>&nbsp;
+<a [routerLink]="['reservations']">Резервације</a>&nbsp;
 <a [routerLink]="['cottages']" [queryParams]="{type: 'власник', ownerUsername: user.username}">Моје викендице</a>
 <hr>
 <router-outlet></router-outlet>

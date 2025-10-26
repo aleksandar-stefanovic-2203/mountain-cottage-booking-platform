@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <th>Датум резервације</th>
+        <th>Датум почетка резервације</th>
+        <th>Датум краја резервације</th>
+        <th>Назив викендице</th>
+        <th>Место викендице</th>
+        <th>Статус</th>
+        <th>Коментар</th>
+    </tr>
+    @for(reservation of currentReservations; track reservation.idR){
+        <tr>
+            <td>{{reservation.reservationDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{reservation.startDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{reservation.endDate | date: 'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{getCottageName(reservation.idC)}}</td>
+            <td>{{getCottageLocation(reservation.idC)}}</td>
+            <td>{{reservation.status}}</td>
+            <td><textarea disabled="true" rows="5" [(ngModel)]="reservation.comment"></textarea></td>
+        </tr>
+    }
+</table>

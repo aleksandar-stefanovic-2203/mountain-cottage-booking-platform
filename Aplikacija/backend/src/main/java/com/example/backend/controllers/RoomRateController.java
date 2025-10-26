@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.db.dao.RoomRateRepo;
+import com.example.backend.models.Reservation;
 import com.example.backend.models.RoomRate;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +37,11 @@ public class RoomRateController {
     @PutMapping("updateRoomRates")
     public int updateRoomRates(@RequestBody List<RoomRate> roomrates) {
         return new RoomRateRepo().updateRoomRates(roomrates);
+    }
+    
+    @PostMapping("/getPrice/{idC}")
+    public double getPrice(@RequestBody Reservation reservation, @PathVariable int idC) {
+        return new RoomRateRepo().getPrice(reservation, idC);
     }
     
 }

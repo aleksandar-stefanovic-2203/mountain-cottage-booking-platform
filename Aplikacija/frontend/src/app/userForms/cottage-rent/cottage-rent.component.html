@@ -1,0 +1,15 @@
+Назив викендице: {{cottage.name}}<br>
+Почетак резервације: <input [disabled]="step === 2" type="datetime-local" [(ngModel)]="reservation.startDate"><br>
+Крај резервације: <input [disabled]="step === 2" type="datetime-local" [(ngModel)]="reservation.endDate"><br>
+Број одраслих особа: <input [disabled]="step === 2" type="number" min="0" [(ngModel)]="reservation.numberOfAdults"><br>
+Број деце: <input [disabled]="step === 2" type="number" min="0" [(ngModel)]="reservation.numberOfChildren"><br>
+
+@if(step === 2){    
+    Број кредитне картице: <input type="text" [(ngModel)]="user.creditCardNumber" (input)="onChange()"><img [src]="imgUrl"><br>
+    Укупна цена: {{this.reservation.price}}<br>
+    Додатни захтеви: <textarea rows="5" cols="30" [(ngModel)]="reservation.additionalRequests"></textarea><br>
+}
+
+<button (click)="changeStep()">{{step === 1 ? "Следећи корак" : "Претходни корак"}}</button>
+<button *ngIf="step === 2" (click)="reserve()">Резервиши</button><br>
+{{message}}

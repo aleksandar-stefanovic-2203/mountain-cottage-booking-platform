@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { PictureService } from '../../services/picture.service';
 import { PictureWrapper } from '../../models/picturewrapper';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cottage-details',
@@ -22,6 +23,7 @@ export class CottageDetailsComponent implements OnInit {
   private roomrateService = inject(RoomrateService)
   private pictureService = inject(PictureService)
   private userService = inject(UserService)
+  private router = inject(Router)
   ngOnInit(): void {
     let name = this.activatedRoute.snapshot.paramMap.get("name")!
     this.cottageService.getCottage(name).subscribe(data => {
@@ -34,6 +36,10 @@ export class CottageDetailsComponent implements OnInit {
         this.imgUrls = this.pictures.map(picture => this.userService.loadImg(picture.pictureBytes))
       })
     })
+  }
+
+  rentCottage(){
+    this.router.navigate([`rentCottage`], {relativeTo: this.activatedRoute})
   }
 
   cottage: Cottage = new Cottage()
