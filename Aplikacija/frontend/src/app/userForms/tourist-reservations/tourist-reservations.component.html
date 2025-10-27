@@ -1,3 +1,4 @@
+Тренутне резервације: <br><br>
 <table>
     <tr>
         <th>Датум резервације</th>
@@ -7,6 +8,7 @@
         <th>Место викендице</th>
         <th>Статус</th>
         <th>Коментар</th>
+        <th></th>
     </tr>
     @for(reservation of currentReservations; track reservation.idR){
         <tr>
@@ -17,6 +19,21 @@
             <td>{{getCottageLocation(reservation.idC)}}</td>
             <td>{{reservation.status}}</td>
             <td><textarea disabled="true" [(ngModel)]="reservation.comment"></textarea></td>
+            <td><button *ngIf="checkCancel(reservation)" (click)="cancel(reservation)">Откажи резервацију</button></td>
+        </tr>
+    }
+</table>
+<hr>
+Прошле резервације: <br><br>
+<table>
+    <tr>
+        <th>Датум почетка резервације</th>
+        <th>Назив викендице</th>
+    </tr>
+    @for(reservation of archivedReservations; track reservation.idR){
+        <tr>            
+            <td>{{reservation.startDate | date: 'dd.MM.yyyy'}}</td>            
+            <td>{{getCottageName(reservation.idC)}}</td>            
         </tr>
     }
 </table>

@@ -121,4 +121,19 @@ public class ReservationRepo implements ReservationRepoInterface {
 
         return 0;
     }
+
+    @Override
+    public int cancelReservation(int idR) {
+        try(Connection con = DB.source().getConnection();
+        PreparedStatement stm = con.prepareStatement("DELETE FROM reservation WHERE idR = ?");){
+            stm.setInt(1, idR);
+
+            return stm.executeUpdate();
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

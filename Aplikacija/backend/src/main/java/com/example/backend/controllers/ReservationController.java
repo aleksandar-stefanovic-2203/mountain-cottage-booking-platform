@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +43,11 @@ public class ReservationController {
     @PatchMapping("/setStatusAndComment/{idR}")
     public int setStatusAndComment(@PathVariable int idR, @RequestBody Map<String, Object> changes){
         return new ReservationRepo().setStatusAndComment(idR, (String)changes.get("status"), (String)changes.get("comment"));
+    }
+
+    @DeleteMapping("/cancel/{idR}")
+    public int cancelReservation(@PathVariable int idR){
+        return new ReservationRepo().cancelReservation(idR);
     }
 
 }

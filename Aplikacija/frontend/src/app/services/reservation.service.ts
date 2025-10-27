@@ -28,4 +28,8 @@ export class ReservationService {
   setStatusAndComment(idR: number, status: string, comment: string){
     return this.http.patch<number>(`${this.backPath}/setStatusAndComment/${idR}`, {status: status, comment: comment})
   }
+
+  cancelReservation(idR: number){
+    return this.http.delete<number>(`${this.backPath}/cancel/${idR}`)
+  }
 }

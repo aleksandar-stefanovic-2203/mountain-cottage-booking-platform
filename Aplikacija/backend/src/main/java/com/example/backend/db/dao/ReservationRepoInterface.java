@@ -9,4 +9,5 @@ public interface ReservationRepoInterface {
     public List<Reservation> getReservations(String touristUsername);
     public List<Reservation> getReservationsOwner(String ownerUsername);
     public int setStatusAndComment(int idR, String status, String comment);
+    public int cancelReservation(int idR);
 }
