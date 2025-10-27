@@ -1,20 +1,20 @@
 import { Routes } from '@angular/router';
-import { LoginUserComponent } from './loginForms/login-user/login-user.component';
-import { LoginAdminComponent } from './loginForms/login-admin/login-admin.component';
-import { UnregisteredUserComponent } from './userForms/unregistered-user/unregistered-user.component';
-import { RegisterComponent } from './register/register.component';
-import { AdminComponent } from './userForms/admin/admin.component';
-import { TouristComponent } from './userForms/tourist/tourist.component';
-import { OwnerComponent } from './userForms/owner/owner.component';
-import { ChangePasswordComponent } from './userForms/change-password/change-password.component';
-import { ProfileComponent } from './userForms/profile/profile.component';
-import { UserListComponent } from './userForms/user-list/user-list.component';
-import { CottagesComponent } from './userForms/cottages/cottages.component';
-import { CottageDetailsComponent } from './userForms/cottage-details/cottage-details.component';
-import { CottageFormComponent } from './userForms/cottage-form/cottage-form.component';
-import { CottageRentComponent } from './userForms/cottage-rent/cottage-rent.component';
-import { TouristReservationsComponent } from './userForms/tourist-reservations/tourist-reservations.component';
-import { OwnerReservationsComponent } from './userForms/owner-reservations/owner-reservations.component';
+import { LoginUserComponent } from './components/auth/login/login-user/login-user.component';
+import { LoginAdminComponent } from './components/auth/login/login-admin/login-admin.component';
+import { UnregisteredUserComponent } from './components/user/unregistered-user/unregistered-user.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { AdminComponent } from './components/user/admin/admin.component';
+import { TouristComponent } from './components/user/tourist/tourist.component';
+import { OwnerComponent } from './components/user/owner/owner.component';
+import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
+import { ProfileComponent } from './components/auth/profile/profile.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+import { CottageListComponent } from './components/cottages/cottage-list/cottage-list.component';
+import { CottageDetailsComponent } from './components/cottages/cottage-details/cottage-details.component';
+import { CottageFormComponent } from './components/cottages/cottage-form/cottage-form.component';
+import { CottageRentComponent } from './components/cottages/cottage-rent/cottage-rent.component';
+import { TouristReservationsComponent } from './components/reservations/tourist-reservations/tourist-reservations.component';
+import { OwnerReservationsComponent } from './components/reservations/owner-reservations/owner-reservations.component';
 
 export const routes: Routes = [
     {path: "", component: UnregisteredUserComponent},
@@ -23,14 +23,14 @@ export const routes: Routes = [
     {path: "register", component: RegisterComponent},
     {path: "tourist", component: TouristComponent, children: [
         {path: "profile/:username", component: ProfileComponent},
-        {path: "cottages", component: CottagesComponent},
+        {path: "cottages", component: CottageListComponent},
         {path: "cottages/:name", component: CottageDetailsComponent},
         {path: "cottages/:name/rentCottage", component: CottageRentComponent},
         {path: "reservations", component: TouristReservationsComponent}
     ]},
     {path: "owner", component: OwnerComponent, children: [
         {path: "profile/:username", component: ProfileComponent},
-        {path: "cottages", component: CottagesComponent},
+        {path: "cottages", component: CottageListComponent},
         {path: "cottages/:name", component: CottageFormComponent},
         {path: "reservations", component: OwnerReservationsComponent}
     ]},
@@ -38,7 +38,7 @@ export const routes: Routes = [
         {path: "profile/:username", component: ProfileComponent},
         {path: "userList", component: UserListComponent}, 
         {path: "userList/:username", component: ProfileComponent},
-        {path: "cottages", component: CottagesComponent}
+        {path: "cottages", component: CottageListComponent}
     ]},
     {path: "changePassword", component: ChangePasswordComponent}
 ];

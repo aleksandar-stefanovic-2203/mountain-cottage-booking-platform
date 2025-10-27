@@ -38,7 +38,6 @@ export class UserService {
     return dinersRegExpr.test(CCN) || masterCardRegExpr.test(CCN) || visaRegExpr.test(CCN)
   }
 
-  // TODO Искоментарисати цео пројекат!!!
   checkImage(file: File): Promise<boolean> {
     const allowedTypes = ['image/jpeg', 'image/png'];
     if(!allowedTypes.includes(file.type)) return Promise.resolve(false);
@@ -56,7 +55,7 @@ export class UserService {
     })
   }
 
-  prepareFormData(user: User): FormData{
+  prepareFormData(user: User): FormData {
     const formData = new FormData()
 
     formData.append('username', user.username);
