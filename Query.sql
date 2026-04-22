@@ -1,5 +1,5 @@
-CREATE DATABASE PlaninskaVikendica;
-USE PlaninskaVikendica;
+CREATE DATABASE MountainCottage;
+USE MountainCottage;
 
 CREATE TABLE User(
 	username VARCHAR(20) PRIMARY KEY,
